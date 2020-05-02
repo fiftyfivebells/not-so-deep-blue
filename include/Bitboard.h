@@ -7,6 +7,8 @@
 
 typedef uint64_t Bitboard;
 
+const Bitboard EMPTY = 0ull;
+
 const Bitboard FileA = 0x0101010101010101;
 const Bitboard FileB = FileA << 1;
 const Bitboard FileC = FileB << 1;
