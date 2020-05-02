@@ -35,19 +35,5 @@ const Bitboard KING_START = 0x1000000000000010;
 const Bitboard ALL_WHITE = 0xFFFF;
 const Bitboard ALL_BLACK = 0xFFFF000000000000;
 
-void printBitboard(const Bitboard b) {
-  for (int row = 7; row >= 0; --row) {
-    for (int col = 0; col <= 7; ++col) {
-      if (b & (1ULL << ((row * 8) + col))) {
-        std::cout << "1 ";
-      }
-      else {
-        std::cout << "0 ";
-      }
-    }
-    std::cout << std::endl;
-  }
-  std::cout  << std::endl;
-}
 
 #endif
