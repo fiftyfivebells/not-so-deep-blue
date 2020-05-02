@@ -2,7 +2,7 @@
 #define TYPES_H
 
 enum PieceType {
-  PAWN, KNIGHT, BISHOP, ROOK, QUEEN, KING
+  PAWN, ROOK, KNIGHT, BISHOP, QUEEN, KING, NONE
 };
 
 enum Piece {
