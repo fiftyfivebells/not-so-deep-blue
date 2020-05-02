@@ -34,8 +34,7 @@ const Bitboard BISHOP_START = 0x2400000000000024;
 const Bitboard QUEEN_START = 0x800000000000008;
 const Bitboard KING_START = 0x1000000000000010;
 
-const Bitboard ALL_WHITE = 0xFFFF;
-const Bitboard ALL_BLACK = 0xFFFF000000000000;
-
+const Bitboard ALL_WHITE_START = 0xFFFF;
+const Bitboard ALL_BLACK_START = 0xFFFF000000000000;
 
 #endif
