@@ -6,7 +6,7 @@ void Rays::init() {
 
   for (int square = 0; square < 64; ++square) {
     rays[square][Rays::North] = 0x0101010101010100 << square;
-    rays[square][Rays::South] = 0x0080808080808080 >> (square - 63);
+    rays[square][Rays::South] = 0x0080808080808080 >> (63 - square);
     rays[square][Rays::East] = 2 * ((1ull << (square | 7)) - (1ull << square));
     rays[square][Rays::West] = (1ull << square) - (1ull << (square & 56));
   }
@@ -42,4 +42,4 @@ void Rays::init() {
   }
 }
 
-Bitboard Rays::getRayBoard(Direction d, Square s) { return rays[s][d]; }
+Bitboard Rays::getRayBoard(Direction d, int s) { return rays[s][d]; }

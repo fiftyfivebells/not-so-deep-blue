@@ -3,7 +3,6 @@
 
 #include "Bitboard.h"
 
-
 namespace Rays {
 
 enum Direction {
@@ -22,7 +21,7 @@ enum Direction {
 
   void init();
 
-  Bitboard getRayBoard(Direction, Square);
+  Bitboard getRayBoard(Direction, int);
 }
 
 #endif
