@@ -41,3 +41,5 @@ void Rays::init() {
       rays[r8-file][Rays::SouthEast] = se;
   }
 }
+
+Bitboard Rays::getRayBoard(Direction d, Square s) { return rays[s][d]; }
