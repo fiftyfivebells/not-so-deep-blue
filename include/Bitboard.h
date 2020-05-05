@@ -40,11 +40,11 @@ const Bitboard ALL_BLACK_START = 0xFFFF000000000000;
 
 inline Bitboard northOne(Bitboard b) { return b << 8; }
 inline Bitboard southOne(Bitboard b) { return b >> 8; }
-inline Bitboard eastOne(Bitboard b) { return (b << 1) & ~FILE_A; }
-inline Bitboard westOne(Bitboard b) { return (b >> 1) & ~FILE_H; }
-inline Bitboard norEastOne(Bitboard b) { return (b << 9) & ~FILE_A; }
-inline Bitboard norWestOne(Bitboard b) { return (b << 7) & ~FILE_H; }
-inline Bitboard souEastOne(Bitboard b) { return (b >> 7) & ~FILE_A; }
-inline Bitboard souWestOne(Bitboard b) { return (b >> 9) & ~FILE_H;}
+inline Bitboard eastOne(Bitboard b) { return ((b << 1) & ~FileA); }
+inline Bitboard westOne(Bitboard b) { return (b >> 1) & ~FileH; }
+inline Bitboard norEastOne(Bitboard b) { return (b << 9) & ~FileA; }
+inline Bitboard norWestOne(Bitboard b) { return (b << 7) & ~FileH; }
+inline Bitboard souEastOne(Bitboard b) { return (b >> 7) & ~FileA; }
+inline Bitboard souWestOne(Bitboard b) { return (b >> 9) & ~FileH;}
 
 #endif
