@@ -47,4 +47,18 @@ inline Bitboard norWestOne(Bitboard b) { return (b << 7) & ~FileH; }
 inline Bitboard souEastOne(Bitboard b) { return (b >> 7) & ~FileA; }
 inline Bitboard souWestOne(Bitboard b) { return (b >> 9) & ~FileH;}
 
+inline void printAsBits(Bitboard b) {
+    for (int row = 7; row >= 0; --row) {
+    for (int col = 0; col <= 7; ++col) {
+      if (b & (1ULL << ((row * 8) + col))) {
+        std::cout << "1 ";
+      } else {
+        std::cout << "0 ";
+      }
+    }
+    std::cout << std::endl;
+  }
+  std::cout << std::endl;
+}
+
 #endif

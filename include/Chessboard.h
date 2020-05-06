@@ -12,7 +12,6 @@ class Chessboard {
   Bitboard getOccupiedSquares() const;
   void setOccupiedSquares();
   PieceType getPieceAtSquare(Color, Square) const;
-  void printAsBits(const Bitboard) const;
   void setToFenString(std::string);
   void clearBitboards();
   Color getSideToMove() const;

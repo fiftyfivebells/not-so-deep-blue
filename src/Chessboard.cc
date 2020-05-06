@@ -66,21 +66,6 @@ PieceType Chessboard::getPieceAtSquare(Color c, Square s) const {
   return piece;
 }
 
-// for debugging only
-void Chessboard::printAsBits(const Bitboard b) const {
-  for (int row = 7; row >= 0; --row) {
-    for (int col = 0; col <= 7; ++col) {
-      if (b & (1ULL << ((row * 8) + col))) {
-        std::cout << "1 ";
-      } else {
-        std::cout << "0 ";
-      }
-    }
-    std::cout << std::endl;
-  }
-  std::cout << std::endl;
-}
-
 Square Chessboard::makeSquareFromFen(std::string fen) {
   File f = (File)(fen[0] - 'a');
   Rank r = (Rank)(fen[1] - '0');
@@ -165,7 +150,7 @@ void Chessboard::setToFenString(std::string fen) {
   enPassantTarget = (entry == "-") ? NO_SQ : makeSquareFromFen(entry);
 
   fenStream >> halfMoveClock;
- 
+
   setOccupiedSquares();
   setEmptySquares();
 }
