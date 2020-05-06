@@ -47,6 +47,10 @@ inline Bitboard norWestOne(Bitboard b) { return (b << 7) & ~FileH; }
 inline Bitboard souEastOne(Bitboard b) { return (b >> 7) & ~FileA; }
 inline Bitboard souWestOne(Bitboard b) { return (b >> 9) & ~FileH;}
 
+inline int bitCount(Bitboard b) { return __builtin_popcountll(b); }
+inline int bitScanForward(Bitboard b) { return __builtin_ffsll(b) - 1; }
+inline int bitScanReverse(Bitboard b) { return 63 - __builtin_clzll(b); }
+
 inline void printAsBits(Bitboard b) {
     for (int row = 7; row >= 0; --row) {
     for (int col = 0; col <= 7; ++col) {
