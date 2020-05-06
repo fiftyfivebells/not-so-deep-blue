@@ -19,12 +19,6 @@ namespace Attacks {
   void initKingAttacks();
   void initPawnAttacks();
 
-  Bitboard getBishopAttacks(int, Bitboard);
-  Bitboard getRookAttacks(int, Bitboard);
-  Bitboard getQueenAttacks(int, Bitboard);
-  Bitboard getKnightAttacks(int, Bitboard);
-  Bitboard getPawnAttacks(int, Bitboard);
-  Bitboard getKingAttacks(int, Bitboard);
   Bitboard getSlidingAttacks(PieceType, Square, Bitboard);
   Bitboard getNonSlidingAttacks(PieceType, Square, Bitboard);
   Bitboard getPawnAttacks(Square, Color, Bitboard);
