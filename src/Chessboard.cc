@@ -25,6 +25,10 @@ Chessboard::Chessboard() {
   setToFenString("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
 }
 
+Chessboard::Chessboard(std::string fenString) {
+  setToFenString(fenString);
+}
+
 }
 
 Bitboard* Chessboard::getWhitePieces() { return pieces[0]; }
