@@ -27,15 +27,12 @@ Chessboard::Chessboard() {
   setToFenString("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
 }
 
-Chessboard::Chessboard(std::string fenString) {
-  setToFenString(fenString);
-}
+Chessboard::Chessboard(std::string fenString) { setToFenString(fenString); }
 
 Bitboard Chessboard::getAllPieces(Color c) const {
   Bitboard allPieces = EMPTY;
 
-  for (int p = PAWN; p < 6; ++p)
-    allPieces |= pieces[c][p];
+  for (int p = PAWN; p < 6; ++p) allPieces |= pieces[c][p];
 
   return allPieces;
 }
@@ -133,7 +130,7 @@ Square Chessboard::makeSquareFromFen(std::string fen) {
   File f = (File)(fen[0] - 'a');
   Rank r = (Rank)(fen[1] - '0');
 
-  return (Square)((r*8) + f);
+  return (Square)((r * 8) + f);
 }
 
 void Chessboard::setToFenString(std::string fen) {
