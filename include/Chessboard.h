@@ -7,6 +7,7 @@ class Chessboard {
  public:
   Chessboard();
   Chessboard(std::string);
+  Bitboard getAllPieces(Color) const;
   Bitboard getEmptySquares() const;
   void setEmptySquares();
   Bitboard getOccupiedSquares() const;
@@ -21,6 +22,7 @@ class Chessboard {
 
  private:
   Bitboard pieces[2][6];
+  Bitboard allPieces[2];
   Bitboard emptySquares;
   Bitboard occupiedSquares;
   char castleAvailability;

@@ -29,6 +29,13 @@ Chessboard::Chessboard(std::string fenString) {
   setToFenString(fenString);
 }
 
+Bitboard Chessboard::getAllPieces(Color c) const {
+  Bitboard allPieces = EMPTY;
+
+  for (int p = PAWN; p < 6; ++p)
+    allPieces |= pieces[c][p];
+
+  return allPieces;
 }
 
 Bitboard* Chessboard::getWhitePieces() { return pieces[0]; }
