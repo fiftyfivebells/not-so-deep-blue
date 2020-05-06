@@ -142,3 +142,7 @@ Bitboard getKnightAttacks(Square sq, Bitboard occupied) {
   return Attacks::knightAttacks[sq] & occupied;
 }
 
+Bitboard getKingAttacks(Square sq, Bitboard occupied) {
+  return Attacks::kingAttacks[sq] & occupied;
+}
+
