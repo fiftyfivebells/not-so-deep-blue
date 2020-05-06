@@ -98,6 +98,8 @@ Bitboard Chessboard::getAttacksFromSquare(Square s, Color c) {
       break;
     case KING: attacks = getKingAttacksFromSquare(s, sameSide);
       break;
+    case NONE: attacks = EMPTY;
+      break;
   }
   return attacks;
 }
