@@ -78,3 +78,33 @@ void Attacks::initAttacks() {
   initKingAttacks();
   initPawnAttacks();
 }
+
+Bitboard getRookAttacks(Square sq, Bitboard occupied) {
+  Bitboard attacks = Rays::getRayBoard(Rays::North, sq) |
+                     Rays::getRayBoard(Rays::South, sq) |
+                     Rays::getRayBoard(Rays::West, sq) |
+                     Rays::getRayBoard(Rays::East, sq);
+
+  if (Rays::getRayBoard(Rays::North, sq) & occupied) {
+    int blocker = bitScanForward(Rays::getRayBoard(Rays::North, sq) & occupied);
+    attacks &= ~Rays::getRayBoard(Rays::North, blocker);
+  }
+
+  if (Rays::getRayBoard(Rays::East, sq) & occupied) {
+    int blocker = bitScanForward(Rays::getRayBoard(Rays::East, sq) & occupied);
+    attacks &= ~Rays::getRayBoard(Rays::East, blocker);
+  }
+
+  if (Rays::getRayBoard(Rays::South, sq) & occupied) {
+    int blocker = bitScanReverse(Rays::getRayBoard(Rays::South, sq) & occupied);
+    attacks &= ~Rays::getRayBoard(Rays::South, blocker);
+  }
+
+  if (Rays::getRayBoard(Rays::North, sq) & occupied) {
+    int blocker = bitScanReverse(Rays::getRayBoard(Rays::West, sq) & occupied);
+    attacks &= ~Rays::getRayBoard(Rays::West, blocker);
+  }
+
+  return attacks;
+}
+
