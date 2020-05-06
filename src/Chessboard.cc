@@ -37,7 +37,7 @@ Bitboard Chessboard::getAllPieces(Color c) const {
   return allPieces;
 }
 
-Bitboard Chessboard::getPiecesByType(Color c, PieceType pt) {
+Bitboard Chessboard::getPiecesByType(Color c, PieceType pt) const {
   return pieces[c][pt];
 }
 
@@ -59,7 +59,7 @@ void Chessboard::setOccupiedSquares() {
       occupiedSquares |= pieces[color][piece];
 }
 
-bool Chessboard::isColorAttackingSquare(Color c, Square s) {
+bool Chessboard::isColorAttackingSquare(Color c, Square s) const {
   Bitboard sq = 1ull << s;
   Bitboard occupied = getOccupiedSquares();
   Color opposite = (c == WHITE) ? BLACK : WHITE;

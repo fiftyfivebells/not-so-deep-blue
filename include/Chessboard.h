@@ -8,13 +8,13 @@ class Chessboard {
   Chessboard();
   Chessboard(std::string);
   Bitboard getAllPieces(Color) const;
-  Bitboard getPiecesByType(Color, PieceType);
+  Bitboard getPiecesByType(Color, PieceType) const;
   Bitboard getEmptySquares() const;
   void setEmptySquares();
   Bitboard getOccupiedSquares() const;
   void setOccupiedSquares();
   PieceType getPieceAtSquare(Color, Square) const;
-  bool isColorAttackingSquare(Color, Square);
+  bool isColorAttackingSquare(Color, Square) const;
   Bitboard getAttacksFromSquare(Square, Color);
   void setToFenString(std::string);
   void clearBitboards();
