@@ -215,8 +215,7 @@ bool Chessboard::canBlackCastleKS() const {
 bool Chessboard::canBlackCastleQS() const {
   if (!(castleAvailability & 0b1000)) return false;
 
-  Bitboard castleSquares =
-      (1ull << SQ_B8) || (1ull << SQ_C8) || (1ull << SQ_D8);
+  Bitboard castleSquares = (1ull << SQ_B8) | (1ull << SQ_C8) | (1ull << SQ_D8);
   bool notEmpty = castleSquares & getOccupiedSquares();
   bool underAttack = isColorAttackingSquare(WHITE, SQ_B8) ||
                      isColorAttackingSquare(WHITE, SQ_C8) ||
