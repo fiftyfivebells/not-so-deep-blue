@@ -108,3 +108,32 @@ Bitboard getRookAttacks(Square sq, Bitboard occupied) {
   return attacks;
 }
 
+Bitboard getBishopAttacks(Square sq, Bitboard occupied) {
+  Bitboard attacks = Rays::getRayBoard(Rays::NorthEast, sq) |
+                     Rays::getRayBoard(Rays::NorthWest, sq) |
+                     Rays::getRayBoard(Rays::SouthEast, sq) |
+                     Rays::getRayBoard(Rays::SouthWest, sq);
+
+  if (Rays::getRayBoard(Rays::NorthWest, sq) & occupied) {
+    int blocker = bitScanForward(Rays::getRayBoard(Rays::NorthWest, sq) & occupied);
+    attacks &= ~Rays::getRayBoard(Rays::NorthWest, blocker);
+  }
+
+  if (Rays::getRayBoard(Rays::NorthEast, sq) & occupied) {
+    int blocker = bitScanForward(Rays::getRayBoard(Rays::NorthEast, sq) & occupied);
+    attacks &= ~Rays::getRayBoard(Rays::NorthEast, blocker);
+  }
+
+  if (Rays::getRayBoard(Rays::SouthWest, sq) & occupied) {
+    int blocker = bitScanReverse(Rays::getRayBoard(Rays::SouthWest, sq) & occupied);
+    attacks &= ~Rays::getRayBoard(Rays::SouthWest, blocker);
+  }
+
+  if (Rays::getRayBoard(Rays::SouthEast, sq) & occupied) {
+    int blocker = bitScanForward(Rays::getRayBoard(Rays::SouthEast, sq) & occupied);
+    attacks &= ~Rays::getRayBoard(Rays::SouthEast, blocker);
+  }
+
+  return attacks;
+}
+
