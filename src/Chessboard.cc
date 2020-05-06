@@ -5,22 +5,26 @@
 #include <sstream>
 
 Chessboard::Chessboard() {
-  pieces[0][0] = PAWN_START & ALL_WHITE_START;
-  pieces[0][1] = ROOK_START & ALL_WHITE_START;
-  pieces[0][2] = KNIGHT_START & ALL_WHITE_START;
-  pieces[0][3] = BISHOP_START & ALL_WHITE_START;
-  pieces[0][4] = QUEEN_START & ALL_WHITE_START;
-  pieces[0][5] = KING_START & ALL_WHITE_START;
+  // pieces[0][0] = PAWN_START & ALL_WHITE_START;
+  // pieces[0][1] = ROOK_START & ALL_WHITE_START;
+  // pieces[0][2] = KNIGHT_START & ALL_WHITE_START;
+  // pieces[0][3] = BISHOP_START & ALL_WHITE_START;
+  // pieces[0][4] = QUEEN_START & ALL_WHITE_START;
+  // pieces[0][5] = KING_START & ALL_WHITE_START;
 
-  pieces[1][0] = PAWN_START & ALL_BLACK_START;
-  pieces[1][1] = ROOK_START & ALL_BLACK_START;
-  pieces[1][2] = KNIGHT_START & ALL_BLACK_START;
-  pieces[1][3] = BISHOP_START & ALL_BLACK_START;
-  pieces[1][4] = QUEEN_START & ALL_BLACK_START;
-  pieces[1][5] = KING_START & ALL_BLACK_START;
+  // pieces[1][0] = PAWN_START & ALL_BLACK_START;
+  // pieces[1][1] = ROOK_START & ALL_BLACK_START;
+  // pieces[1][2] = KNIGHT_START & ALL_BLACK_START;
+  // pieces[1][3] = BISHOP_START & ALL_BLACK_START;
+  // pieces[1][4] = QUEEN_START & ALL_BLACK_START;
+  // pieces[1][5] = KING_START & ALL_BLACK_START;
 
-  emptySquares = ~(ALL_BLACK_START | ALL_WHITE_START);
-  occupiedSquares = ~emptySquares;
+  // emptySquares = ~(ALL_BLACK_START | ALL_WHITE_START);
+  // occupiedSquares = ~emptySquares;
+
+  setToFenString("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
+}
+
 }
 
 Bitboard* Chessboard::getWhitePieces() { return pieces[0]; }
