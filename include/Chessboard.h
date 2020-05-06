@@ -6,15 +6,14 @@
 class Chessboard {
  public:
   Chessboard();
-  Bitboard *getWhitePieces();
-  Bitboard *getBlackPieces();
+  Chessboard(std::string);
   Bitboard getEmptySquares() const;
   void setEmptySquares();
   Bitboard getOccupiedSquares() const;
   void setOccupiedSquares();
   PieceType getPieceAtSquare(Color, Square) const;
-  void printAsBits(const Bitboard b) const;
-  void setToFenString(std::string fen);
+  void printAsBits(const Bitboard) const;
+  void setToFenString(std::string);
   void clearBitboards();
   Color getSideToMove() const;
   Square getEnPassantTarget() const;
@@ -31,6 +30,8 @@ class Chessboard {
   Color sideToMove;
   Square enPassantTarget;
   Square makeSquareFromFen(std::string);
+  Bitboard *getWhitePieces();
+  Bitboard *getBlackPieces();
 };
 
 #endif
