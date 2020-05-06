@@ -22,6 +22,11 @@ class Chessboard {
   Square getEnPassantTarget() const;
   char getTurnNumber() const;
   char getHalfMoveClock() const;
+  bool isColorInCheck(Color) const;
+  bool canWhiteCastleKS() const;
+  bool canWhiteCastleQS() const;
+  bool canBlackCastleKS() const;
+  bool canBlackCastleQS() const;
 
  private:
   Bitboard pieces[2][6];

@@ -162,6 +162,62 @@ Square Chessboard::makeSquareFromFen(std::string fen) {
   return (Square)((r * 8) + f);
 }
 
+bool Chessboard::isColorInCheck(Color c) const {
+  Bitboard king = getPiecesByType(c, KING);
+  Square s = (Square)bitScanForward(king);
+
+  Color enemy = (c == WHITE) ? BLACK : WHITE;
+
+  return isColorAttackingSquare(enemy, s);
+}
+
+bool Chessboard::canWhiteCastleKS() const {
+  if (!(castleAvailability & 0b0001)) return false;
+
+  Bitboard castleSquares = (1ull << SQ_F1) | (1ull << SQ_G1);
+  bool notEmpty = castleSquares & getOccupiedSquares();
+  bool underAttack = isColorAttackingSquare(BLACK, SQ_F1) ||
+                     isColorAttackingSquare(BLACK, SQ_G1);
+
+  return !notEmpty && !underAttack && !isColorInCheck(WHITE);
+}
+
+bool Chessboard::canWhiteCastleQS() const {
+  if (!(castleAvailability & 0b0010)) return false;
+
+  Bitboard castleSquares = (1ull << SQ_B1) | (1ull << SQ_C1) | (1ull << SQ_D1);
+  bool notEmpty = castleSquares & getOccupiedSquares();
+  bool underAttack = isColorAttackingSquare(BLACK, SQ_B1) ||
+                     isColorAttackingSquare(BLACK, SQ_C1) ||
+                     isColorAttackingSquare(BLACK, SQ_D1);
+
+  return !notEmpty && !underAttack && !isColorInCheck(WHITE);
+}
+
+bool Chessboard::canBlackCastleKS() const {
+  if (!(castleAvailability & 0b0100)) return false;
+
+  Bitboard castleSquares = (1ull << SQ_F8) | (1ull << SQ_G8);
+  bool notEmpty = castleSquares & getOccupiedSquares();
+  bool underAttack = isColorAttackingSquare(WHITE, SQ_F8) ||
+                     isColorAttackingSquare(WHITE, SQ_G8);
+
+  return !notEmpty && !underAttack && !isColorInCheck(BLACK);
+}
+
+bool Chessboard::canBlackCastleQS() const {
+  if (!(castleAvailability & 0b1000)) return false;
+
+  Bitboard castleSquares =
+      (1ull << SQ_B8) || (1ull << SQ_C8) || (1ull << SQ_D8);
+  bool notEmpty = castleSquares & getOccupiedSquares();
+  bool underAttack = isColorAttackingSquare(WHITE, SQ_B8) ||
+                     isColorAttackingSquare(WHITE, SQ_C8) ||
+                     isColorAttackingSquare(WHITE, SQ_D8);
+
+  return !notEmpty && !underAttack && !isColorInCheck(BLACK);
+}
+
 void Chessboard::setToFenString(std::string fen) {
   std::istringstream fenStream(fen);
   std::string entry;
