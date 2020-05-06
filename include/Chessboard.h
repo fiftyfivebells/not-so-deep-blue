@@ -13,6 +13,7 @@ class Chessboard {
   Bitboard getOccupiedSquares() const;
   void setOccupiedSquares();
   PieceType getPieceAtSquare(Color, Square) const;
+  Bitboard getAttacksFromSquare(Square, Color);
   void setToFenString(std::string);
   void clearBitboards();
   Color getSideToMove() const;
@@ -33,6 +34,12 @@ class Chessboard {
   Square makeSquareFromFen(std::string);
   Bitboard *getWhitePieces();
   Bitboard *getBlackPieces();
+  Bitboard getPawnAttacksFromSquare(Square, Color, Bitboard);
+  Bitboard getRookAttacksFromSquare(Square, Bitboard);
+  Bitboard getBishopAttacksFromSquare(Square, Bitboard);
+  Bitboard getQueenAttacksFromSquare(Square, Bitboard);
+  Bitboard getKnightAttacksFromSquare(Square, Bitboard);
+  Bitboard getKingAttacksFromSquare(Square, Bitboard);
 };
 
 #endif
