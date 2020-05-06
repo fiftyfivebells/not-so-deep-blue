@@ -300,3 +300,27 @@ void Chessboard::clearBitboards() {
   occupiedSquares = EMPTY;
   emptySquares = EMPTY;
 }
+
+void Chessboard::movePiece(Square from, Square to, PieceType pt, Color c) {
+  Bitboard moveMask = (1ull << from) | (1ull << to);
+
+  pieces[c][pt] ^= moveMask;
+  allPieces[c] ^= moveMask;
+  occupiedSquares ^= moveMask;
+}
+
+void Chessboard::removePiece(Square s, PieceType pt, Color c) {
+  Bitboard squareMask = 1ull << s;
+
+  pieces[c][pt] ^= squareMask;
+  allPieces[c] ^= squareMask;
+  occupiedSquares ^= squareMask;
+}
+
+void Chessboard::addPiece(Square s, PieceType pt, Color c) {
+  Bitboard square = 1ull << s;
+
+  pieces[c][pt] |= square;
+  allPieces[c] |= square;
+  occupiedSquares |= square;
+}

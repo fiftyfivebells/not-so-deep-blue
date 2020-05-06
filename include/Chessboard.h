@@ -27,6 +27,9 @@ class Chessboard {
   bool canWhiteCastleQS() const;
   bool canBlackCastleKS() const;
   bool canBlackCastleQS() const;
+  void movePiece(Square, Square, PieceType, Color);
+  void removePiece(Square, PieceType, Color);
+  void addPiece(Square, PieceType, Color);
 
  private:
   Bitboard pieces[2][6];
