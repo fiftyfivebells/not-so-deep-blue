@@ -4,6 +4,8 @@
 #include <iterator>
 #include <sstream>
 
+#include "../include/Attacks.h"
+
 Chessboard::Chessboard() {
   // pieces[0][0] = PAWN_START & ALL_WHITE_START;
   // pieces[0][1] = ROOK_START & ALL_WHITE_START;
@@ -79,6 +81,52 @@ PieceType Chessboard::getPieceAtSquare(Color c, Square s) const {
   //    piece at square " + std::to_string(boardIndex) + " does not exist.");
 
   return piece;
+}
+
+Bitboard Chessboard::getAttacksFromSquare(Square s, Color c) {
+  PieceType pt = getPieceAtSquare(c, s);
+
+  Bitboard sameSide = getAllPieces(c);
+  Bitboard attacks;
+  switch (pt) {
+    case PAWN: attacks = getPawnAttacksFromSquare(s, c, sameSide);
+      break;
+    case ROOK: attacks = getRookAttacksFromSquare(s, sameSide);
+      break;
+    case BISHOP: attacks = getBishopAttacksFromSquare(s, sameSide);
+      break;
+    case KNIGHT: attacks = getKnightAttacksFromSquare(s, sameSide);
+      break;
+    case QUEEN: attacks = getQueenAttacksFromSquare(s, sameSide);
+      break;
+    case KING: attacks = getKingAttacksFromSquare(s, sameSide);
+      break;
+  }
+  return attacks;
+}
+
+Bitboard Chessboard::getPawnAttacksFromSquare(Square s, Color c, Bitboard friends) {
+  return Attacks::getPawnAttacks(s, c, getOccupiedSquares()) & ~friends;
+}
+
+Bitboard Chessboard::getRookAttacksFromSquare(Square s, Bitboard friends) {
+  return Attacks::getSlidingAttacks(ROOK, s, getOccupiedSquares()) & ~friends;
+}
+
+Bitboard Chessboard::getBishopAttacksFromSquare(Square s, Bitboard friends) {
+  return Attacks::getSlidingAttacks(BISHOP, s, getOccupiedSquares()) & ~friends;
+}
+
+Bitboard Chessboard::getQueenAttacksFromSquare(Square s, Bitboard friends) {
+  return Attacks::getSlidingAttacks(QUEEN, s, getOccupiedSquares()) & ~friends;
+}
+
+Bitboard Chessboard::getKingAttacksFromSquare(Square s, Bitboard friends) {
+  return 1;
+}
+
+Bitboard Chessboard::getKnightAttacksFromSquare(Square s, Bitboard friends) {
+  return 1;
 }
 
 Square Chessboard::makeSquareFromFen(std::string fen) {
