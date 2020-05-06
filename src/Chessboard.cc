@@ -113,19 +113,26 @@ Bitboard Chessboard::getAttacksFromSquare(Square s, Color c) {
   Bitboard sameSide = getAllPieces(c);
   Bitboard attacks;
   switch (pt) {
-    case PAWN: attacks = getPawnAttacksFromSquare(s, c, sameSide);
+    case PAWN:
+      attacks = getPawnAttacksFromSquare(s, c, sameSide);
       break;
-    case ROOK: attacks = getRookAttacksFromSquare(s, sameSide);
+    case ROOK:
+      attacks = getRookAttacksFromSquare(s, sameSide);
       break;
-    case BISHOP: attacks = getBishopAttacksFromSquare(s, sameSide);
+    case BISHOP:
+      attacks = getBishopAttacksFromSquare(s, sameSide);
       break;
-    case KNIGHT: attacks = getKnightAttacksFromSquare(s, sameSide);
+    case KNIGHT:
+      attacks = getKnightAttacksFromSquare(s, sameSide);
       break;
-    case QUEEN: attacks = getQueenAttacksFromSquare(s, sameSide);
+    case QUEEN:
+      attacks = getQueenAttacksFromSquare(s, sameSide);
       break;
-    case KING: attacks = getKingAttacksFromSquare(s, sameSide);
+    case KING:
+      attacks = getKingAttacksFromSquare(s, sameSide);
       break;
-    case NONE: attacks = EMPTY;
+    case NONE:
+      attacks = EMPTY;
       break;
   }
   return attacks;
@@ -281,13 +288,17 @@ void Chessboard::setToFenString(std::string fen) {
   castleAvailability = 0;
   for (char current : entry) {
     switch (current) {
-      case 'K': castleAvailability |= 0b0001;
+      case 'K':
+        castleAvailability |= 0b0001;
         break;
-      case 'Q': castleAvailability |= 0b0010;
+      case 'Q':
+        castleAvailability |= 0b0010;
         break;
-      case 'k': castleAvailability |= 0b0100;
+      case 'k':
+        castleAvailability |= 0b0100;
         break;
-      case 'q': castleAvailability |= 0b1000;
+      case 'q':
+        castleAvailability |= 0b1000;
     }
   }
 
