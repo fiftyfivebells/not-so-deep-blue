@@ -49,7 +49,7 @@ void Chessboard::setEmptySquares() { emptySquares = ~occupiedSquares; }
 Bitboard Chessboard::getOccupiedSquares() const { return occupiedSquares; }
 
 void Chessboard::setOccupiedSquares() {
-  occupiedSquares = NONE;
+  occupiedSquares = EMPTY;
 
   for (int color = WHITE; color <= BLACK; ++color)
     for (int piece = PAWN; piece <= KING; ++piece)
