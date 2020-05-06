@@ -119,11 +119,11 @@ Bitboard Chessboard::getQueenAttacksFromSquare(Square s, Bitboard friends) {
 }
 
 Bitboard Chessboard::getKingAttacksFromSquare(Square s, Bitboard friends) {
-  return 1;
+  return Attacks::getNonSlidingAttacks(KING, s, getOccupiedSquares()) & ~friends;
 }
 
 Bitboard Chessboard::getKnightAttacksFromSquare(Square s, Bitboard friends) {
-  return 1;
+  return Attacks::getNonSlidingAttacks(KNIGHT, s, getOccupiedSquares()) & ~friends;
 }
 
 Square Chessboard::makeSquareFromFen(std::string fen) {
