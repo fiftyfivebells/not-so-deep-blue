@@ -146,3 +146,7 @@ Bitboard getKingAttacks(Square sq, Bitboard occupied) {
   return Attacks::kingAttacks[sq] & occupied;
 }
 
+
+Bitboard Attacks::getPawnAttacks(Square sq, Color c, Bitboard occupied) {
+  return pawnAttacks[c][sq] & occupied;
+}
