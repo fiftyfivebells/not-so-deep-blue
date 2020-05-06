@@ -37,6 +37,10 @@ Bitboard Chessboard::getAllPieces(Color c) const {
   return allPieces;
 }
 
+Bitboard Chessboard::getPiecesByType(Color c, PieceType pt) {
+  return pieces[c][pt];
+}
+
 Bitboard* Chessboard::getWhitePieces() { return pieces[0]; }
 
 Bitboard* Chessboard::getBlackPieces() { return pieces[1]; }

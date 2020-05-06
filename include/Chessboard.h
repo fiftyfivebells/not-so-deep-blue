@@ -8,6 +8,7 @@ class Chessboard {
   Chessboard();
   Chessboard(std::string);
   Bitboard getAllPieces(Color) const;
+  Bitboard getPiecesByType(Color, PieceType);
   Bitboard getEmptySquares() const;
   void setEmptySquares();
   Bitboard getOccupiedSquares() const;
