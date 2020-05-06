@@ -14,6 +14,7 @@ class Chessboard {
   Bitboard getOccupiedSquares() const;
   void setOccupiedSquares();
   PieceType getPieceAtSquare(Color, Square) const;
+  bool isColorAttackingSquare(Color, Square);
   Bitboard getAttacksFromSquare(Square, Color);
   void setToFenString(std::string);
   void clearBitboards();

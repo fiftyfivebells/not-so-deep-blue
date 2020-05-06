@@ -59,6 +59,29 @@ void Chessboard::setOccupiedSquares() {
       occupiedSquares |= pieces[color][piece];
 }
 
+bool Chessboard::isColorAttackingSquare(Color c, Square s) {
+  Bitboard sq = 1ull << s;
+  Bitboard occupied = getOccupiedSquares();
+  Color opposite = (c == WHITE) ? BLACK : WHITE;
+
+  if (Attacks::getPawnAttacks(s, opposite, getPiecesByType(WHITE, PAWN)))
+    return true;
+  if (Attacks::getNonSlidingAttacks(KNIGHT, s, getPiecesByType(c, KNIGHT)))
+    return true;
+  if (Attacks::getNonSlidingAttacks(KING, s, getPiecesByType(c, KING)))
+    return true;
+
+  Bitboard bishopsQueens = getPiecesByType(c, BISHOP) | getPiecesByType(c, QUEEN);
+  if (Attacks::getSlidingAttacks(BISHOP, s, bishopsQueens))
+    return true;
+
+  Bitboard rooksQueens = getPiecesByType(c, ROOK) | getPiecesByType(c, QUEEN);
+  if (Attacks::getSlidingAttacks(ROOK, s, rooksQueens))
+    return true;
+
+  return false;
+}
+
 PieceType Chessboard::getPieceAtSquare(Color c, Square s) const {
   Bitboard square = 1ull << s;
 
