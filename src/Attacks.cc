@@ -137,6 +137,18 @@ Bitboard getBishopAttacks(Square sq, Bitboard occupied) {
   return attacks;
 }
 
+Bitboard Attacks::getSlidingAttacks(PieceType pt, Square sq,
+                                    Bitboard occupied) {
+  switch (pt) {
+    case ROOK:
+      return getRookAttacks(sq, occupied);
+    case BISHOP:
+      return getBishopAttacks(sq, occupied);
+    case QUEEN:
+      return getRookAttacks(sq, occupied) | getBishopAttacks(sq, occupied);
+    default: return EMPTY;
+  }
+}
 
 Bitboard getKnightAttacks(Square sq, Bitboard occupied) {
   return Attacks::knightAttacks[sq] & occupied;
@@ -146,6 +158,13 @@ Bitboard getKingAttacks(Square sq, Bitboard occupied) {
   return Attacks::kingAttacks[sq] & occupied;
 }
 
+Bitboard Attacks::getNonSlidingAttacks(PieceType pt, Square sq, Bitboard occupied) {
+  switch (pt) {
+    case KNIGHT: return getKnightAttacks(sq, occupied);
+    case KING: return getKingAttacks(sq, occupied);
+    default: return EMPTY;
+  }
+}
 
 Bitboard Attacks::getPawnAttacks(Square sq, Color c, Bitboard occupied) {
   return pawnAttacks[c][sq] & occupied;
