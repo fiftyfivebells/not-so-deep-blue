@@ -5,6 +5,7 @@ Bitboard Attacks::bishopAttacks[64];
 Bitboard Attacks::queenAttacks[64];
 Bitboard Attacks::knightAttacks[64];
 Bitboard Attacks::kingAttacks[64];
+Bitboard Attacks::pawnAttacks[2][64];
 
 void Attacks::initRookAttacks() {
   for (int square = SQ_A1; square < 64; ++square)
@@ -50,10 +51,31 @@ void Attacks::initKingAttacks() {
   }
 }
 
+void initWhitePawnAttacks() {
+  for (int square = SQ_A2; square < 56; ++square) {
+    Bitboard sq = 1ull << square;
+    Attacks::pawnAttacks[WHITE][square] =
+        ((sq << 9) & ~FileA) | ((sq << 7) & ~FileH);
+  }
+}
+
+void initBlackPawnAttacks() {
+  for (int square = SQ_H7; square > 7; --square) {
+    Bitboard sq = 1ull << square;
+    Attacks::pawnAttacks[BLACK][square] = ((sq >> 9) & ~FileH) | ((sq >> 7) & ~FileA);
+  }
+}
+
+void Attacks::initPawnAttacks() {
+  initWhitePawnAttacks();
+  initBlackPawnAttacks();
+}
+
 void Attacks::initAttacks() {
   initRookAttacks();
   initBishopAttacks();
   initQueenAttacks();
   initKnightAttacks();
   initKingAttacks();
+  initPawnAttacks();
 }

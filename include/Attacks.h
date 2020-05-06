@@ -9,6 +9,7 @@ namespace Attacks {
   extern Bitboard queenAttacks[64];
   extern Bitboard knightAttacks[64];
   extern Bitboard kingAttacks[64];
+  extern Bitboard pawnAttacks[2][64];
 
   void initAttacks();
   void initRookAttacks();
@@ -16,11 +17,13 @@ namespace Attacks {
   void initQueenAttacks();
   void initKnightAttacks();
   void initKingAttacks();
+  void initPawnAttacks();
 
   Bitboard getBishopAttacks(int, Bitboard);
   Bitboard getRookAttacks(int, Bitboard);
   Bitboard getQueenAttacks(int, Bitboard);
   Bitboard getKnightAttacks(int, Bitboard);
+  Bitboard getPawnAttacks(int, Bitboard);
   Bitboard getKingAttacks(int, Bitboard);
 };
 
