@@ -32,5 +32,10 @@ unsigned int Move::getFlag() const { return (move >> 21) & FLAG_BITS; }
 
 void Move::setFlag(unsigned int flag) {}
 
-bool Move::operator==(Move other) const { return true; }
-bool Move::operator!=(Move other) const { return true; }
+bool Move::operator==(Move other) const {
+  return (move & 0xffff) == (other.getMove() & 0xffff);
+}
+
+bool Move::operator!=(Move other) const {
+  return (move & 0xffff) != (other.getMove() & 0xffff);
+}
