@@ -12,28 +12,36 @@ Move::Move(Square from, Square to, PieceType pt, unsigned int flags) {
 
 unsigned int Move::getMove() const { return move; }
 
-unsigned int Move::getToSquare() const { return (move >> 15) & SQUARE_BITS; }
+Square Move::getToSquare() const {
+  return (Square)((move >> 15) & SQUARE_BITS);
+}
 
 void Move::setToSquare(Square to) {
   unsigned int bitMask = SQUARE_BITS << 15;
   move = (move & ~bitMask) | ((to << 15) & bitMask);
 }
 
-unsigned int Move::getFromSquare() const { return (move >> 9) & SQUARE_BITS; }
+Square Move::getFromSquare() const {
+  return (Square)((move >> 9) & SQUARE_BITS);
+}
 
 void Move::setFromSquare(Square from) {
   unsigned int bitMask = SQUARE_BITS << 9;
   move = (move & ~bitMask) | ((from << 9) & bitMask);
 }
 
-unsigned int Move::getPieceType() const { return move & PIECE_BITS; }
+PieceType Move::getPieceType() const {
+  return (PieceType)(move & PIECE_BITS);
+}
 
 void Move::setPieceType(PieceType pt) {
   unsigned int bitMask = PIECE_BITS;
   move = (move & ~bitMask) | (pt & bitMask);
 }
 
-unsigned int Move::getCapturedPiece() const { return (move >> 3) & PIECE_BITS; }
+PieceType Move::getCapturedPiece() const {
+  return (PieceType)((move >> 3) & PIECE_BITS);
+}
 
 void Move::setCapturedPiece(PieceType pt) {
   unsigned int bitMask = PIECE_BITS << 3;

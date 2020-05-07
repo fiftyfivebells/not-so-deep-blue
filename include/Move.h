@@ -31,16 +31,16 @@ class Move {
   };
 
   unsigned int getMove() const;
-  unsigned int getToSquare() const;
+  Square getToSquare() const;
   void setToSquare(Square);
 
-  unsigned int getFromSquare() const;
+  Square getFromSquare() const;
   void setFromSquare(Square);
 
-  unsigned int getPieceType() const;
+  PieceType getPieceType() const;
   void setPieceType(PieceType);
 
-  unsigned int getCapturedPiece() const;
+  PieceType getCapturedPiece() const;
   void setCapturedPiece(PieceType);
 
   unsigned int getFlag() const;
