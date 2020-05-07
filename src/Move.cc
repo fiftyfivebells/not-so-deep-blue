@@ -3,10 +3,11 @@
 Move::Move() {}
 
 Move::Move(Square from, Square to, PieceType pt, unsigned int flags) {
-  move |= (pt & 7);
-  move |= ((from & 63) << 9);
-  move |= ((to & 63) << 15);
-  move |= ((flags & 15) << 24);
+  move = 0;
+  move |= (pt & PIECE_BITS);
+  move |= ((from & SQUARE_BITS) << 9);
+  move |= ((to & SQUARE_BITS) << 15);
+  move |= ((flags & FLAG_BITS) << 21);
 }
 
 unsigned int Move::getMove() const { return move; }

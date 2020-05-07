@@ -4,12 +4,16 @@
 #include "Bitboard.h"
 #include "Chessboard.h"
 
+#define SQUARE_BITS 63
+#define PIECE_BITS 7
+#define FLAG_BITS 15
+
 class Move {
  public:
   Move(Square, Square, PieceType, unsigned int = 0);
   Move();
 
-  enum Flag : unsigned char {
+  enum Flag : unsigned int {
     QUIET_MOVE = 0,
     D_PAWN_PUSH,
     K_CASTLE,
