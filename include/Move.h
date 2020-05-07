@@ -43,6 +43,9 @@ class Move {
   PieceType getCapturedPiece() const;
   void setCapturedPiece(PieceType);
 
+  PieceType getPromotionPiece() const;
+  void setPromotionPiece(PieceType);
+
   unsigned int getFlag() const;
   void setFlag(unsigned int);
 

@@ -48,6 +48,15 @@ void Move::setCapturedPiece(PieceType pt) {
   move = (move & ~bitMask) | ((pt << 3) & bitMask);
 }
 
+PieceType Move::getPromotionPiece() const {
+  return (PieceType)((move >> 6) & PIECE_BITS);
+}
+
+void Move::setPromotionPiece(PieceType pt) {
+  unsigned int bitMask = PIECE_BITS;
+  move (move & ~bitMask) | ((move << 6) & PIECE_BITS);
+}
+
 unsigned int Move::getFlag() const { return (move >> 21) & FLAG_BITS; }
 
 void Move::setFlag(unsigned int flag) {
