@@ -6,7 +6,7 @@
 
 class Move {
  public:
-  Move(Square, Square, PieceType, unsigned char = 0);
+  Move(Square, Square, PieceType, unsigned int = 0);
   Move();
 
   enum Flag : unsigned char {
@@ -26,14 +26,21 @@ class Move {
     QP_CAPTURE
   };
 
-  unsigned char getToSquare();
+  unsigned int getMove() const;
+  unsigned int getToSquare() const;
   void setToSquare(Square);
 
-  unsigned char getFromSquare();
+  unsigned int getFromSquare() const;
   void setFromSquare(Square);
 
-  unsigned char getFlag();
-  void setFlag(unsigned char);
+  unsigned int getPieceType() const;
+  void setPieceType(PieceType);
+
+  unsigned int getCapturedPiece() const;
+  void setCapturedPiece(PieceType);
+
+  unsigned int getFlag() const;
+  void setFlag(unsigned int);
 
   bool operator==(Move) const;
   bool operator!=(Move) const;
