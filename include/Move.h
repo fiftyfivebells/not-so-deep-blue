@@ -2,7 +2,6 @@
 #define MOVE_H
 
 #include "Bitboard.h"
-#include "Chessboard.h"
 
 #define SQUARE_BITS 63
 #define PIECE_BITS 7

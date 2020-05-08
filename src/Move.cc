@@ -54,7 +54,7 @@ PieceType Move::getPromotionPiece() const {
 
 void Move::setPromotionPiece(PieceType pt) {
   unsigned int bitMask = PIECE_BITS;
-  move (move & ~bitMask) | ((move << 6) & PIECE_BITS);
+  move = (move & ~bitMask) | ((pt << 6) & PIECE_BITS);
 }
 
 unsigned int Move::getFlag() const { return (move >> 21) & FLAG_BITS; }
