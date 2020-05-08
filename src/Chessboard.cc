@@ -207,6 +207,37 @@ bool Chessboard::canBlackCastleQS() const {
   return !notEmpty && !underAttack && !isColorInCheck(BLACK);
 }
 
+void Chessboard::updateCastleAvailability(Move m) {
+  unsigned int flag = m.getFlag();
+
+  if (flag == Move::CAPTURE) {
+    switch (m.getToSquare()) {
+      case SQ_A1: castleAvailability &= ~0b0010;
+        break;
+      case SQ_H1: castleAvailability &= ~0b0001;
+        break;
+      case SQ_A8: castleAvailability &= ~0b1000;
+        break;
+      case SQ_H8: castleAvailability &= ~0b0100;
+        break;
+    }
+  } else {
+    switch(m.getFromSquare()) {
+      case SQ_E1: castleAvailability &= ~0b0011;
+        break;
+      case SQ_H1: castleAvailability &= ~0b0001;
+        break;
+      case SQ_A1: castleAvailability &= ~0b0010;
+        break;
+      case SQ_E8: castleAvailability &= ~0b1100;
+        break;
+      case SQ_H8: castleAvailability &= ~0b0100;
+        break;
+      case SQ_A8: castleAvailability &= ~0b1000;
+    }
+  }
+}
+
 void Chessboard::setToFenString(std::string fen) {
   std::istringstream fenStream(fen);
   std::string entry;
