@@ -63,8 +63,16 @@ void MoveGenerator::generateQueenMoves(const Chessboard &cb) {
   }
 }
 
+void MoveGenerator::generateKingMoves(const Chessboard &cb) {
+  Color active = cb.getActiveSide();
+  Color enemy = cb.getInactiveSide();
+  Bitboard king = cb.getPiecesByType(active, KING);
 
-    addMoves(cb, fromSquare, ROOK, moves, cb.getPiecesToAttack(enemy));
+  while (king) {
+    Square fromSquare = popLSB(king);
+    Bitboard allMoves = cb.getAttacksFromSquare(fromSquare, active);
+
+    addMoves(cb, fromSquare, KING, allMoves, cb.getPiecesToAttack(enemy));
   }
 }
 
