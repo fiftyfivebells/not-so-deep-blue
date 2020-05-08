@@ -14,8 +14,9 @@ std::vector<Move> MoveGenerator::getLegalMoves() const { return legalMoves; }
 void MoveGenerator::generateMoves(const Chessboard &cb) {
   moves.clear();
 
-  if (active == WHITE) generateWhitePawnMoves(cb);
-  else generateBlackPawnMoves(cb);
+  Color active = cb.getActiveSide();
+  if (active == WHITE) generateWPawnMoves(cb);
+  else generateBPawnMoves(cb);
 
   generateRookMoves(cb);
   generateKnightMoves(cb);
@@ -256,7 +257,6 @@ void MoveGenerator::generatePawnPromotions(Square from, Square to, PieceType pt)
     promotion.setFlag(Move::CAP_PROMOTION);
     promotion.setCapturedPiece(pt);
   }
-
 
   Move queen(promotion);
   queen.setPromotionPiece(QUEEN);
