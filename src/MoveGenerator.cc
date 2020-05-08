@@ -80,7 +80,7 @@ void MoveGenerator::addMoves(const Chessboard &cb, Square from, PieceType pt,
                              Bitboard allMoves, Bitboard attacked) {
 
   Color active = cb.getActiveSide();
-  Color enemy = (active == WHITE) ? BLACK : WHITE;
+  Color enemy = cb.getInactiveSide();
 
   // exclude king attacks
   allMoves &= ~(cb.getPiecesByType(enemy, KING));
