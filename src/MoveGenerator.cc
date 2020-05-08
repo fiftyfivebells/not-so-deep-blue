@@ -24,3 +24,29 @@ void MoveGenerator::generateRookMoves(const Chessboard &cb) {
   }
 }
 
+void MoveGenerator::addMoves(const Chessboard &cb, Square from, PieceType pt,
+                             Bitboard allMoves, Bitboard attacked) {
+
+  Color active = cb.getActiveSide();
+  Color enemy = (active == WHITE) ? BLACK : WHITE;
+
+  // exclude king attacks
+  allMoves &= ~(cb.getPiecesByType(enemy, KING));
+
+  Bitboard quietMoves = allMoves & ~attacked;
+  while (quietMoves) {
+    Square to = popLSB(quietMoves);
+    moves.push_back(Move(from, to, pt));
+  }
+
+  Bitboard attacks = allMoves & attacked;
+  while (attacks) {
+    Square to = popLSB(attacks);
+    PieceType capture = cb.getPieceAtSquare(enemy, to);
+
+    Move m(from, to, pt, Move::CAPTURE);
+    m.setCapturedPiece(capture);
+
+    moves.push_back(m);
+  }
+}
