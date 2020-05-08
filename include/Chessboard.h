@@ -41,7 +41,7 @@ class Chessboard {
   char castleAvailability;
   char halfMoveClock;
   char turnNumber;
-  Color sideToMove;
+  Color activeSide;
   Square enPassantTarget;
   Square makeSquareFromFen(std::string);
   Bitboard *getWhitePieces();

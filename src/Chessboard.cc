@@ -264,7 +264,7 @@ void Chessboard::setToFenString(std::string fen) {
   }
 
   fenStream >> entry;
-  sideToMove = entry == "w" ? WHITE : BLACK;
+  activeSide = entry == "w" ? WHITE : BLACK;
 
   fenStream >> entry;
   castleAvailability = 0;
