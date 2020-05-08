@@ -81,7 +81,7 @@ void MoveGenerator::generateWPawnLeftAttacks(const Chessboard &cb) {
   leftAttacks &= ~Rank8;
 
   Bitboard leftEP = (1ull << cb.getEnPassantTarget());
-  leftEP &= cb.getPiecesByType(WHITE, PAWN) & ~FileH;
+  leftEP &= (cb.getPiecesByType(WHITE, PAWN) << 7) & ~FileH;
 
   while (leftAttacks) {
     Square toSquare = popLSB(leftAttacks);
@@ -115,7 +115,7 @@ void MoveGenerator::generateWPawnRightAttacks(const Chessboard &cb) {
   rightAttacks &= ~Rank8;
 
   Bitboard rightEP = (1ull << cb.getEnPassantTarget());
-  rightEP &= cb.getPiecesByType(WHITE, PAWN) & ~FileA;
+  rightEP &= (cb.getPiecesByType(WHITE, PAWN) << 9) & ~FileA;
 
   while (rightAttacks) {
     Square toSquare = popLSB(rightAttacks);
