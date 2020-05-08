@@ -141,6 +141,113 @@ void MoveGenerator::generateWPawnRightAttacks(const Chessboard &cb) {
   }
 }
 
+
+void MoveGenerator::generateBPawnMoves(const Chessboard &cb) {
+  generateBPawnSinglePush(cb);
+  generateBPawnDoublePush(cb);
+  generateBPawnLeftAttacks(cb);
+  generateBPawnRightAttacks(cb);
+}
+
+void MoveGenerator::generateBPawnSinglePush(const Chessboard &cb) {
+  Bitboard singlePush = cb.getPiecesByType(BLACK, PAWN) >> 8;
+  singlePush &= cb.getEmptySquares();
+
+  Bitboard promotions = singlePush & Rank1;
+  singlePush &= ~Rank1;
+
+  while (singlePush) {
+    Square toSquare = popLSB(singlePush);
+    Square fromSquare = Square(toSquare + 8);
+    moves.push_back(Move(fromSquare, toSquare, PAWN));
+  }
+
+  while (promotions) {
+    Square toSquare = popLSB(promotions);
+
+    generatePawnPromotions(Square(toSquare + 8), toSquare);
+  }
+}
+
+void MoveGenerator::generateBPawnDoublePush(const Chessboard &cb) {
+  Bitboard singlePush = (cb.getPiecesByType(BLACK, PAWN) >> 8) & cb.getEmptySquares();
+  Bitboard doublePush = (singlePush << 8) & cb.getEmptySquares() & Rank5;
+
+  while (doublePush) {
+    Square toSquare = popLSB(doublePush);
+    Square fromSquare = Square(toSquare + 16);
+    moves.push_back(Move(fromSquare, toSquare, PAWN, Move::D_PAWN_PUSH));
+  }
+}
+
+void MoveGenerator::generateBPawnLeftAttacks(const Chessboard &cb) {
+  Bitboard leftAttacks = (cb.getPiecesByType(BLACK, PAWN) >> 9) & ~FileH;
+  leftAttacks &= cb.getPiecesToAttack(WHITE);
+
+  Bitboard leftAttackPromos = leftAttacks & Rank1;
+  leftAttacks &= ~Rank1;
+
+  Bitboard leftEP = (1ull << cb.getEnPassantTarget());
+  leftEP &= (cb.getPiecesByType(BLACK, PAWN) >> 9) & ~FileH;
+
+  while (leftAttacks) {
+    Square toSquare = popLSB(leftAttacks);
+    Move move(Square(toSquare + 9), toSquare, PAWN, Move::CAPTURE);
+    move.setCapturedPiece(cb.getPieceAtSquare(WHITE, toSquare));
+
+    moves.push_back(move);
+  }
+
+  while (leftAttackPromos) {
+    Square toSquare = popLSB(leftAttackPromos);
+    PieceType capture = cb.getPieceAtSquare(WHITE, toSquare);
+
+    generatePawnPromotions(Square(toSquare + 9), toSquare, capture);
+  }
+
+  if (leftEP) {
+    Square toSquare = popLSB(leftEP);
+    Move ep(Square(toSquare + 9), toSquare, PAWN, Move::EP_CAPTURE);
+    ep.setCapturedPiece(PAWN);
+
+    moves.push_back(ep);
+  }
+}
+
+void MoveGenerator::generateBPawnRightAttacks(const Chessboard &cb) {
+  Bitboard rightAttacks = (cb.getPiecesByType(BLACK, PAWN) >> 7) & ~FileA;
+  rightAttacks &= cb.getPiecesToAttack(WHITE);
+
+  Bitboard rightAttackPromos = rightAttacks & Rank1;
+  rightAttacks &= ~Rank1;
+
+  Bitboard rightEP = (1ull << cb.getEnPassantTarget());
+  rightEP &= (cb.getPiecesByType(BLACK, PAWN) >> 7) & ~FileA;
+
+  while (rightAttacks) {
+    Square toSquare = popLSB(rightAttacks);
+    Move move(Square(toSquare + 7), toSquare, PAWN, Move::CAPTURE);
+    move.setCapturedPiece(cb.getPieceAtSquare(WHITE, toSquare));
+
+    moves.push_back(move);
+  }
+
+  while (rightAttackPromos) {
+    Square toSquare = popLSB(rightAttackPromos);
+    PieceType capture = cb.getPieceAtSquare(WHITE, toSquare);
+
+    generatePawnPromotions(Square(toSquare + 7), toSquare, capture);
+  }
+
+  if (rightEP) {
+    Square toSquare = popLSB(rightEP);
+    Move ep(Square(toSquare + 7), toSquare, PAWN, Move::EP_CAPTURE);
+    ep.setCapturedPiece(PAWN);
+
+    moves.push_back(ep);
+  }
+}
+
 void MoveGenerator::generatePawnPromotions(Square from, Square to, PieceType pt) {
   Move promotion(from, to, PAWN);
   if (pt == NONE) promotion.setFlag(Move::PROMOTION);
