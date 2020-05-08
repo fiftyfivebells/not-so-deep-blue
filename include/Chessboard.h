@@ -18,6 +18,8 @@ class Chessboard {
   bool isColorAttackingSquare(Color, Square) const;
   Bitboard getAttacksFromSquare(Square, Color) const;
   void setToFenString(std::string);
+  std::string convertBoardToFen();
+  std::string pieceToChar(Square) const;
   void clearBitboards();
   Color getActiveSide() const;
   Color getInactiveSide() const;
@@ -47,6 +49,7 @@ class Chessboard {
   Square enPassantTarget;
 
   Square makeSquareFromFen(std::string);
+  std::string makeFenFromSquare(Square);
   Bitboard *getWhitePieces();
   Bitboard *getBlackPieces();
   Bitboard getPawnAttacksFromSquare(Square, Color, Bitboard) const;

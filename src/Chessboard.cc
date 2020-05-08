@@ -156,6 +156,14 @@ Square Chessboard::makeSquareFromFen(std::string fen) {
   return (Square)((r * 8) + f);
 }
 
+std::string Chessboard::makeFenFromSquare(Square sq) {
+  File f = getFileFromSquare(sq);
+  Rank r = getRankFromSquare(sq);
+  std::string file = std::string(1, 'a' + f);
+
+  return file + std::to_string(r);
+}
+
 Color Chessboard::getActiveSide() const { return activeSide; }
 
 Color Chessboard::getInactiveSide() const {
@@ -248,6 +256,78 @@ void Chessboard::updateCastleAvailability(Move m) {
   }
 }
 
+std::string Chessboard::pieceToChar(Square s) const {
+  Bitboard sq = 1ull << s;
+
+  if (pieces[WHITE][PAWN] & sq) return "P";
+  if (pieces[BLACK][PAWN] & sq) return "p";
+
+  if (pieces[WHITE][ROOK] & sq) return "R";
+  if (pieces[BLACK][ROOK] & sq) return "r";
+
+  if (pieces[WHITE][KNIGHT] & sq) return "N";
+  if (pieces[BLACK][KNIGHT] & sq) return "n";
+
+  if (pieces[WHITE][BISHOP] & sq) return "B";
+  if (pieces[BLACK][BISHOP] & sq) return "b";
+
+  if (pieces[WHITE][QUEEN] & sq) return "Q";
+  if (pieces[BLACK][QUEEN] & sq) return "q";
+
+  if (pieces[WHITE][KING] & sq) return "K";
+  if (pieces[BLACK][KING] & sq) return "k";
+
+  return "";
+}
+
+std::string Chessboard::convertBoardToFen() {
+  std::string fen = "";
+  int emptyCount;
+  Square sq;
+  Bitboard boardPos;
+
+  for (int rank = RANK_8; rank >= RANK_1; --rank) {
+    emptyCount = 0;
+
+    for (int file = FILE_A - 1; file < FILE_H; ++file) {
+      sq = makeSquare((Rank)rank, (File)(file));
+      boardPos = 1ull << sq;
+
+      if (!(boardPos & occupiedSquares))
+        ++emptyCount;
+      else {
+        if (emptyCount > 0) {
+          fen += std::to_string(emptyCount);
+          emptyCount = 0;
+        }
+        fen += pieceToChar(sq);
+      }
+    }
+    if (emptyCount > 0) fen += std::to_string(emptyCount);
+    if (rank > RANK_1) fen += "/";
+  }
+
+  fen += (activeSide == WHITE) ? " w " : " b ";
+
+  if (castleAvailability & 0b0001) fen += "K";
+  if (castleAvailability & 0b0010) fen += "Q";
+  if (castleAvailability & 0b0100) fen += "k";
+  if (castleAvailability & 0b1000) fen += "q";
+  if (castleAvailability == 0) fen += "-";
+
+  fen += " ";
+
+  if (!(enPassantTarget == NO_SQ)) fen += makeFenFromSquare(enPassantTarget);
+  else fen += "-";
+
+  fen += " ";
+  fen += std::string(1, halfMoveClock);
+  fen += " ";
+  fen += std::string(1, turnNumber);
+
+  return fen;
+}
+
 void Chessboard::setToFenString(std::string fen) {
   std::istringstream fenStream(fen);
   std::string entry;
@@ -329,6 +409,7 @@ void Chessboard::setToFenString(std::string fen) {
   enPassantTarget = (entry == "-") ? NO_SQ : makeSquareFromFen(entry);
 
   fenStream >> halfMoveClock;
+  fenStream >> turnNumber;
 
   setOccupiedSquares();
   setEmptySquares();
@@ -428,6 +509,8 @@ void Chessboard::performMove(Move m) {
 
   if (castleAvailability)
     updateCastleAvailability(m);
+
+  if (activeSide == BLACK) ++turnNumber;
 
   activeSide = getInactiveSide();
 }
