@@ -19,7 +19,7 @@ class Chessboard {
   Bitboard getAttacksFromSquare(Square, Color) const;
   void setToFenString(std::string);
   void clearBitboards();
-  Color getSideToMove() const;
+  Color getActiveSide() const;
   Square getEnPassantTarget() const;
   char getTurnNumber() const;
   char getHalfMoveClock() const;
