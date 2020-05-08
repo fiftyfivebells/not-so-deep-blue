@@ -20,16 +20,13 @@ class MoveGenerator {
   std::vector<Move> moves;
   std::vector<Move> legalMoves;
 
-  void generateWhitePawnMoves(const Chessboard &);
-  void generateBlackPawnMoves(const Chessboard &);
   void generateWPawnMoves(const Chessboard &);
   void generateWPawnSinglePush(const Chessboard &);
   void generateWPawnDoublePush(const Chessboard &);
   void generateWPawnLeftAttacks(const Chessboard &);
   void generateWPawnRightAttacks(const Chessboard &);
-  void generateWPawnPromotions(Square, Square);
-  void generateWPawnCapPromos(Square, Square, PieceType);
-
+  void generateWPawnPromotions(Square, Square, PieceType = NONE);
+  
   void generateBPawnMoves(const Chessboard &);
   void generateBPawnSinglePush(const Chessboard &);
   void generateBPawnDoublePush(const Chessboard &);
