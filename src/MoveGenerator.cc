@@ -13,12 +13,17 @@ std::vector<Move> MoveGenerator::getLegalMoves() const { return legalMoves; }
 
 void MoveGenerator::generateRookMoves(const Chessboard &cb) {
   Color active = cb.getActiveSide();
-  Color enemy = (active == WHITE) ? BLACK : WHITE;
+  Color enemy = cb.getInactiveSide();
   Bitboard rooks = cb.getPiecesByType(active, ROOK);
 
   while (rooks) {
     Square fromSquare = popLSB(rooks);
-    Bitboard moves = cb.getAttacksFromSquare(fromSquare, active);
+    Bitboard allMoves = cb.getAttacksFromSquare(fromSquare, active);
+
+    addMoves(cb, fromSquare, ROOK, allMoves, cb.getPiecesToAttack(enemy));
+  }
+}
+
 
     addMoves(cb, fromSquare, ROOK, moves, cb.getPiecesToAttack(enemy));
   }
