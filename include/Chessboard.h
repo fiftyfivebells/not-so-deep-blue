@@ -31,6 +31,7 @@ class Chessboard {
   void movePiece(Square, Square, PieceType, Color);
   void removePiece(Square, PieceType, Color);
   void addPiece(Square, PieceType, Color);
+  void performMove(Move);
 
  private:
   Bitboard pieces[2][6];

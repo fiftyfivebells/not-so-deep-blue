@@ -324,3 +324,69 @@ void Chessboard::addPiece(Square s, PieceType pt, Color c) {
   allPieces[c] |= square;
   occupiedSquares |= square;
 }
+
+void Chessboard::performMove(Move m) {
+  Square to = m.getToSquare();
+  Square from = m.getFromSquare();
+  PieceType pt = m.getPieceType();
+  unsigned int flag = m.getFlag();
+  PieceType capture;
+  PieceType promotion;
+  Color enemy = (activeSide == WHITE) ? BLACK : WHITE;
+
+  if (enPassantTarget)
+    enPassantTarget = NO_SQ;
+
+  movePiece(from, to, pt, activeSide);
+
+  switch(flag) {
+    case Move::QUIET_MOVE:
+      break;
+    case Move::D_PAWN_PUSH:
+      enPassantTarget = (activeSide == WHITE) ? (Square)(from + 8) : (Square)(from - 8);
+      break;
+    case Move::K_CASTLE:
+      if (activeSide == WHITE)
+        movePiece(SQ_H1, SQ_F1, ROOK, WHITE);
+      else
+        movePiece(SQ_H8, SQ_F8, ROOK, BLACK);
+      break;
+    case Move::Q_CASTLE:
+      if (activeSide == WHITE)
+        movePiece(SQ_A1, SQ_B1, ROOK, WHITE);
+      else
+        movePiece(SQ_A8, SQ_B8, ROOK, BLACK);
+      break;
+    case Move::CAPTURE:
+      capture = m.getCapturedPiece();
+      removePiece(to, capture, enemy);
+      break;
+    case Move::EP_CAPTURE:
+      if (activeSide == WHITE)
+        removePiece((Square)(to - 8), PAWN, BLACK);
+      else
+        removePiece((Square)(to + 8), PAWN, WHITE);
+      break;
+    case Move::PROMOTION:
+      promotion = m.getPromotionPiece();
+      removePiece(to, pt, activeSide);
+      addPiece(to, promotion, activeSide);
+      break;
+    case Move::CAP_PROMOTION:
+      promotion = m.getPromotionPiece();
+      capture = m.getCapturedPiece();
+      removePiece(to, pt, activeSide);
+      removePiece(to, capture, enemy);
+      addPiece(to, promotion, activeSide);
+  }
+
+  if (pt == PAWN || flag == Move::CAPTURE)
+    halfMoveClock = 0;
+  else
+    ++halfMoveClock;
+
+  if (castleAvailability)
+    updateCastleAvailability(m);
+
+  activeSide = (activeSide == WHITE) ? BLACK : WHITE;
+}
