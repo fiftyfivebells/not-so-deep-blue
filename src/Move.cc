@@ -10,6 +10,8 @@ Move::Move(Square from, Square to, PieceType pt, unsigned int flags) {
   move |= ((flags & FLAG_BITS) << 21);
 }
 
+Move::Move(Move &other) { this->move = other.move; }
+
 unsigned int Move::getMove() const { return move; }
 
 Square Move::getToSquare() const {

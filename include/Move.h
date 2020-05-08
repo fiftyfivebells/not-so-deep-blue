@@ -9,8 +9,9 @@
 
 class Move {
  public:
-  Move(Square, Square, PieceType, unsigned int = 0);
   Move();
+  Move(Square, Square, PieceType, unsigned int = 0);
+  Move(Move &);
 
   enum Flag : unsigned int {
     QUIET_MOVE = 0,
