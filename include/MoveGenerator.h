@@ -26,14 +26,14 @@ class MoveGenerator {
   void generateWPawnDoublePush(const Chessboard &);
   void generateWPawnLeftAttacks(const Chessboard &);
   void generateWPawnRightAttacks(const Chessboard &);
-  void generateWPawnPromotions(Square, Square, PieceType = NONE);
-  
+
   void generateBPawnMoves(const Chessboard &);
   void generateBPawnSinglePush(const Chessboard &);
   void generateBPawnDoublePush(const Chessboard &);
   void generateBPawnLeftAttacks(const Chessboard &);
   void generateBPawnRightAttacks(const Chessboard &);
-  void generateBPawnPromotions(Square, Square, PieceType);
+
+  void generatePawnPromotions(Square, Square, PieceType = NONE);
 
   void generateRookMoves(const Chessboard &);
   void generateKnightMoves(const Chessboard &);

@@ -58,7 +58,7 @@ void MoveGenerator::generateWPawnSinglePush(const Chessboard &cb) {
     Square toSquare = popLSB(promotions);
     Square fromSquare = (Square)(toSquare - 8);
 
-    generateWPawnPromotions(fromSquare, toSquare);
+    generatePawnPromotions(fromSquare, toSquare);
   }
 }
 
@@ -95,7 +95,7 @@ void MoveGenerator::generateWPawnLeftAttacks(const Chessboard &cb) {
     Square toSquare = popLSB(leftAttackPromos);
     PieceType capture = cb.getPieceAtSquare(BLACK, toSquare);
 
-    generateWPawnPromotions(Square(toSquare - 9), toSquare, capture);
+    generatePawnPromotions(Square(toSquare - 9), toSquare, capture);
   }
 
   if (leftEP) {
@@ -129,7 +129,7 @@ void MoveGenerator::generateWPawnRightAttacks(const Chessboard &cb) {
     Square toSquare = popLSB(rightAttackPromos);
     PieceType capture = cb.getPieceAtSquare(BLACK, toSquare);
 
-    generateWPawnPromotions(Square(toSquare - 9), toSquare, capture);
+    generatePawnPromotions(Square(toSquare - 9), toSquare, capture);
   }
 
   if (rightEP) {
@@ -141,7 +141,7 @@ void MoveGenerator::generateWPawnRightAttacks(const Chessboard &cb) {
   }
 }
 
-void MoveGenerator::generateWPawnPromotions(Square from, Square to, PieceType pt) {
+void MoveGenerator::generatePawnPromotions(Square from, Square to, PieceType pt) {
   Move promotion(from, to, PAWN);
   if (pt == NONE) promotion.setFlag(Move::PROMOTION);
 
