@@ -12,7 +12,7 @@ std::vector<Move> MoveGenerator::getMoves() const { return moves; }
 std::vector<Move> MoveGenerator::getLegalMoves() const { return legalMoves; }
 
 void MoveGenerator::generateMoves(const Chessboard &cb) {
-  Color active = cb.getActiveSide();
+  moves.clear();
 
   if (active == WHITE) generateWhitePawnMoves(cb);
   else generateBlackPawnMoves(cb);
@@ -44,9 +44,9 @@ void MoveGenerator::generateWPawnMoves(const Chessboard &cb) {
 void MoveGenerator::generateWPawnSinglePush(const Chessboard &cb) {
   Bitboard singlePush = cb.getPiecesByType(WHITE, PAWN) << 8;
   singlePush &= cb.getEmptySquares();
-  singlePush &= ~Rank8;
 
   Bitboard promotions = singlePush & Rank8;
+  singlePush &= ~Rank8;
 
   while (singlePush) {
     Square toSquare = popLSB(singlePush);
