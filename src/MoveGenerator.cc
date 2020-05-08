@@ -24,6 +24,15 @@ void MoveGenerator::generateMoves(const Chessboard &cb) {
   generateKingMoves(cb);
 }
 
+void MoveGenerator::generateLegalMoves(const Chessboard &cb) {
+  for (auto move : moves) {
+    Chessboard temp = cb;
+    temp.performMove(move);
+
+    if (!temp.isColorInCheck(temp.getActiveSide()))
+      legalMoves.push_back(move);
+  }
+}
 
 void MoveGenerator::generateWPawnMoves(const Chessboard &cb) {
   generateWPawnSinglePush(cb);
