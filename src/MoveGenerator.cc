@@ -90,7 +90,7 @@ void MoveGenerator::generateKingMoves(const Chessboard &cb) {
 }
 
 void MoveGenerator::addMoves(const Chessboard &cb, Square from, PieceType pt,
-                             Bitboard allMoves, Bitboard attacked) {
+                             Bitboard allMoves, Bitboard canAttack) {
 
   Color active = cb.getActiveSide();
   Color enemy = cb.getInactiveSide();
@@ -98,13 +98,13 @@ void MoveGenerator::addMoves(const Chessboard &cb, Square from, PieceType pt,
   // exclude king attacks
   allMoves &= ~(cb.getPiecesByType(enemy, KING));
 
-  Bitboard quietMoves = allMoves & ~attacked;
+  Bitboard quietMoves = allMoves & ~canAttack;
   while (quietMoves) {
     Square to = popLSB(quietMoves);
     moves.push_back(Move(from, to, pt));
   }
 
-  Bitboard attacks = allMoves & attacked;
+  Bitboard attacks = allMoves & canAttack;
   while (attacks) {
     Square to = popLSB(attacks);
     PieceType capture = cb.getPieceAtSquare(enemy, to);
