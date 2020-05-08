@@ -6,7 +6,7 @@
 
 #define SQUARE_BITS 63
 #define PIECE_BITS 7
-#define FLAG_BITS 15
+#define FLAG_BITS 7
 
 class Move {
  public:
@@ -20,17 +20,11 @@ class Move {
     Q_CASTLE,
     CAPTURE,
     EP_CAPTURE,
-    N_PROMOTION,
-    B_PROMOTION,
-    R_PROMOTION,
-    Q_PROMOTION,
-    NP_CAPTURE,
-    BP_CAPTURE,
-    RP_CAPTURE,
-    QP_CAPTURE
+    PROMOTION,
+    CAP_PROMOTION
   };
 
-  unsigned int getMove() const;
+    unsigned int getMove() const;
   Square getToSquare() const;
   void setToSquare(Square);
 
