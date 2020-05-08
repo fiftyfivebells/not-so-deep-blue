@@ -24,6 +24,19 @@ void MoveGenerator::generateRookMoves(const Chessboard &cb) {
   }
 }
 
+void MoveGenerator::generateKnightMoves(const Chessboard &cb) {
+  Color active = cb.getActiveSide();
+  Color enemy = cb.getInactiveSide();
+  Bitboard knights = cb.getPiecesByType(active, KNIGHT);
+
+  while (knights) {
+    Square fromSquare = popLSB(knights);
+    Bitboard allMoves = cb.getAttacksFromSquare(fromSquare, active);
+
+    addMoves(cb, fromSquare, KNIGHT, allMoves, cb.getPiecesToAttack(enemy));
+  }
+}
+
 
     addMoves(cb, fromSquare, ROOK, moves, cb.getPiecesToAttack(enemy));
   }
