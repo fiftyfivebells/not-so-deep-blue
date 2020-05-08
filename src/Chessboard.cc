@@ -45,7 +45,7 @@ void Chessboard::setOccupiedSquares() {
 bool Chessboard::isColorAttackingSquare(Color c, Square s) const {
   Bitboard sq = 1ull << s;
   Bitboard occupied = getOccupiedSquares();
-  Color opposite = (c == WHITE) ? BLACK : WHITE;
+  Color opposite = getInactiveSide();
 
   if (Attacks::getPawnAttacks(s, opposite, getPiecesByType(WHITE, PAWN)))
     return true;
@@ -158,7 +158,7 @@ bool Chessboard::isColorInCheck(Color c) const {
   Bitboard king = getPiecesByType(c, KING);
   Square s = (Square)bitScanForward(king);
 
-  Color enemy = (c == WHITE) ? BLACK : WHITE;
+  Color enemy = getInactiveSide();
 
   return isColorAttackingSquare(enemy, s);
 }
@@ -365,7 +365,7 @@ void Chessboard::performMove(Move m) {
   unsigned int flag = m.getFlag();
   PieceType capture;
   PieceType promotion;
-  Color enemy = (activeSide == WHITE) ? BLACK : WHITE;
+  Color enemy = getInactiveSide();
 
   if (enPassantTarget)
     enPassantTarget = NO_SQ;
@@ -421,5 +421,5 @@ void Chessboard::performMove(Move m) {
   if (castleAvailability)
     updateCastleAvailability(m);
 
-  activeSide = (activeSide == WHITE) ? BLACK : WHITE;
+  activeSide = getInactiveSide();
 }

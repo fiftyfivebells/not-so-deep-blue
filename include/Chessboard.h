@@ -20,6 +20,7 @@ class Chessboard {
   void setToFenString(std::string);
   void clearBitboards();
   Color getActiveSide() const;
+  Color getInactiveSide() const;
   Square getEnPassantTarget() const;
   char getTurnNumber() const;
   char getHalfMoveClock() const;
