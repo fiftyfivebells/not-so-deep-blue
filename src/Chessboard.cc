@@ -90,7 +90,7 @@ PieceType Chessboard::getPieceAtSquare(Color c, Square s) const {
   return piece;
 }
 
-Bitboard Chessboard::getAttacksFromSquare(Square s, Color c) {
+Bitboard Chessboard::getAttacksFromSquare(Square s, Color c) const {
   PieceType pt = getPieceAtSquare(c, s);
 
   Bitboard sameSide = getAllPieces(c);
@@ -121,27 +121,27 @@ Bitboard Chessboard::getAttacksFromSquare(Square s, Color c) {
   return attacks;
 }
 
-Bitboard Chessboard::getPawnAttacksFromSquare(Square s, Color c, Bitboard friends) {
+Bitboard Chessboard::getPawnAttacksFromSquare(Square s, Color c, Bitboard friends) const {
   return Attacks::getPawnAttacks(s, c, getOccupiedSquares()) & ~friends;
 }
 
-Bitboard Chessboard::getRookAttacksFromSquare(Square s, Bitboard friends) {
+Bitboard Chessboard::getRookAttacksFromSquare(Square s, Bitboard friends) const {
   return Attacks::getSlidingAttacks(ROOK, s, getOccupiedSquares()) & ~friends;
 }
 
-Bitboard Chessboard::getBishopAttacksFromSquare(Square s, Bitboard friends) {
+Bitboard Chessboard::getBishopAttacksFromSquare(Square s, Bitboard friends) const {
   return Attacks::getSlidingAttacks(BISHOP, s, getOccupiedSquares()) & ~friends;
 }
 
-Bitboard Chessboard::getQueenAttacksFromSquare(Square s, Bitboard friends) {
+Bitboard Chessboard::getQueenAttacksFromSquare(Square s, Bitboard friends) const {
   return Attacks::getSlidingAttacks(QUEEN, s, getOccupiedSquares()) & ~friends;
 }
 
-Bitboard Chessboard::getKingAttacksFromSquare(Square s, Bitboard friends) {
+Bitboard Chessboard::getKingAttacksFromSquare(Square s, Bitboard friends) const {
   return Attacks::getNonSlidingAttacks(KING, s, getOccupiedSquares()) & ~friends;
 }
 
-Bitboard Chessboard::getKnightAttacksFromSquare(Square s, Bitboard friends) {
+Bitboard Chessboard::getKnightAttacksFromSquare(Square s, Bitboard friends) const {
   return Attacks::getNonSlidingAttacks(KNIGHT, s, getOccupiedSquares()) & ~friends;
 }
 

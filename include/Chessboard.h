@@ -16,7 +16,7 @@ class Chessboard {
   void setOccupiedSquares();
   PieceType getPieceAtSquare(Color, Square) const;
   bool isColorAttackingSquare(Color, Square) const;
-  Bitboard getAttacksFromSquare(Square, Color);
+  Bitboard getAttacksFromSquare(Square, Color) const;
   void setToFenString(std::string);
   void clearBitboards();
   Color getSideToMove() const;
@@ -47,12 +47,12 @@ class Chessboard {
   Square makeSquareFromFen(std::string);
   Bitboard *getWhitePieces();
   Bitboard *getBlackPieces();
-  Bitboard getPawnAttacksFromSquare(Square, Color, Bitboard);
-  Bitboard getRookAttacksFromSquare(Square, Bitboard);
-  Bitboard getBishopAttacksFromSquare(Square, Bitboard);
-  Bitboard getQueenAttacksFromSquare(Square, Bitboard);
-  Bitboard getKnightAttacksFromSquare(Square, Bitboard);
-  Bitboard getKingAttacksFromSquare(Square, Bitboard);
+  Bitboard getPawnAttacksFromSquare(Square, Color, Bitboard) const;
+  Bitboard getRookAttacksFromSquare(Square, Bitboard) const;
+  Bitboard getBishopAttacksFromSquare(Square, Bitboard) const;
+  Bitboard getQueenAttacksFromSquare(Square, Bitboard) const;
+  Bitboard getKnightAttacksFromSquare(Square, Bitboard) const;
+  Bitboard getKingAttacksFromSquare(Square, Bitboard) const;
 };
 
 #endif
