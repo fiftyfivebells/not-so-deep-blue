@@ -42,6 +42,8 @@ void Chessboard::setOccupiedSquares() {
       occupiedSquares |= pieces[color][piece];
 }
 
+Square Chessboard::getEnPassantTarget() const { return enPassantTarget; }
+
 bool Chessboard::isColorAttackingSquare(Color c, Square s) const {
   Bitboard sq = 1ull << s;
   Bitboard occupied = getOccupiedSquares();
