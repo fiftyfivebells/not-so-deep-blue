@@ -42,9 +42,20 @@ enum Square {
   NO_SQ
 };
 
+constexpr Square makeSquare(Rank r, File f) {
+  return (Square)((r * 8) + f);
+}
 
 constexpr Piece makePiece(Color c, PieceType p) {
   return Piece((c << 3) + p);
+}
+
+constexpr Rank getRankFromSquare(Square sq) {
+  return (Rank)(sq / 8);
+}
+
+constexpr File getFileFromSquare(Square sq) {
+  return (File)(sq % 8);
 }
 
 #endif
