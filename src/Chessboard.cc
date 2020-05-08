@@ -90,6 +90,10 @@ PieceType Chessboard::getPieceAtSquare(Color c, Square s) const {
   return piece;
 }
 
+Bitboard Chessboard::getPiecesToAttack(Color c) const {
+  return getAllPieces(c) & ~getPiecesByType(c, KING);
+}
+
 Bitboard Chessboard::getAttacksFromSquare(Square s, Color c) const {
   PieceType pt = getPieceAtSquare(c, s);
 
