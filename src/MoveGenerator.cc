@@ -50,6 +50,19 @@ void MoveGenerator::generateBishopMoves(const Chessboard &cb) {
   }
 }
 
+void MoveGenerator::generateQueenMoves(const Chessboard &cb) {
+  Color active = cb.getActiveSide();
+  Color enemy = cb.getInactiveSide();
+  Bitboard queens = cb.getPiecesByType(active, QUEEN);
+
+  while (queens) {
+    Square fromSquare = popLSB(queens);
+    Bitboard allMoves = cb.getAttacksFromSquare(fromSquare, active);
+
+    addMoves(cb, fromSquare, QUEEN, allMoves, cb.getPiecesToAttack(enemy));
+  }
+}
+
 
     addMoves(cb, fromSquare, ROOK, moves, cb.getPiecesToAttack(enemy));
   }
