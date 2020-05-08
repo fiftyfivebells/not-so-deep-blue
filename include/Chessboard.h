@@ -17,6 +17,7 @@ class Chessboard {
   PieceType getPieceAtSquare(Color, Square) const;
   bool isColorAttackingSquare(Color, Square) const;
   Bitboard getAttacksFromSquare(Square, Color) const;
+  Bitboard getPiecesToAttack(Color) const;
   void setToFenString(std::string);
   std::string convertBoardToFen();
   std::string pieceToChar(Square) const;
