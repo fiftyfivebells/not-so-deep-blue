@@ -2,6 +2,7 @@
 #define CHESSBOARD_H
 
 #include "Bitboard.h"
+#include "Move.h"
 
 class Chessboard {
  public:
