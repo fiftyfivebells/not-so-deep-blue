@@ -11,6 +11,19 @@ void MoveGenerator::generateMoves(const Chessboard &cb) {}
 std::vector<Move> MoveGenerator::getMoves() const { return moves; }
 std::vector<Move> MoveGenerator::getLegalMoves() const { return legalMoves; }
 
+void MoveGenerator::generateMoves(const Chessboard &cb) {
+  Color active = cb.getActiveSide();
+
+  if (active == WHITE) generateWhitePawnMoves(cb);
+  else generateBlackPawnMoves(cb);
+
+  generateRookMoves(cb);
+  generateKnightMoves(cb);
+  generateBishopMoves(cb);
+  generateQueenMoves(cb);
+  generateKingMoves(cb);
+}
+
 void MoveGenerator::generateRookMoves(const Chessboard &cb) {
   Color active = cb.getActiveSide();
   Color enemy = cb.getInactiveSide();
