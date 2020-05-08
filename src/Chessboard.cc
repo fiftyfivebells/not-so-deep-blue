@@ -154,6 +154,10 @@ Square Chessboard::makeSquareFromFen(std::string fen) {
 
 Color Chessboard::getActiveSide() const { return activeSide; }
 
+Color Chessboard::getInactiveSide() const {
+  return (activeSide == WHITE) ? BLACK : WHITE;
+}
+
 bool Chessboard::isColorInCheck(Color c) const {
   Bitboard king = getPiecesByType(c, KING);
   Square s = (Square)bitScanForward(king);

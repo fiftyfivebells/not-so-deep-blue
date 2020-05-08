@@ -45,6 +45,7 @@ class Chessboard {
   char turnNumber;
   Color activeSide;
   Square enPassantTarget;
+
   Square makeSquareFromFen(std::string);
   Bitboard *getWhitePieces();
   Bitboard *getBlackPieces();
