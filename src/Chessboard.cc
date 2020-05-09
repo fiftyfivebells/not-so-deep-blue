@@ -49,19 +49,19 @@ bool Chessboard::isColorAttackingSquare(Color c, Square s) const {
   Bitboard occupied = getOccupiedSquares();
   Color opposite = getInactiveSide();
 
-  if (Attacks::getPawnAttacks(s, opposite, getPiecesByType(WHITE, PAWN)))
+  if (Attacks::getPawnAttacks(s, opposite, getPiecesByType(c, PAWN)) & sq)
     return true;
-  if (Attacks::getNonSlidingAttacks(KNIGHT, s, getPiecesByType(c, KNIGHT)))
+  if (Attacks::getNonSlidingAttacks(KNIGHT, s, getPiecesByType(c, KNIGHT)) & sq)
     return true;
-  if (Attacks::getNonSlidingAttacks(KING, s, getPiecesByType(c, KING)))
+  if (Attacks::getNonSlidingAttacks(KING, s, getPiecesByType(c, KING)) & sq)
     return true;
 
   Bitboard bishopsQueens = getPiecesByType(c, BISHOP) | getPiecesByType(c, QUEEN);
-  if (Attacks::getSlidingAttacks(BISHOP, s, bishopsQueens))
+  if (Attacks::getSlidingAttacks(BISHOP, s, bishopsQueens) & sq)
     return true;
 
   Bitboard rooksQueens = getPiecesByType(c, ROOK) | getPiecesByType(c, QUEEN);
-  if (Attacks::getSlidingAttacks(ROOK, s, rooksQueens))
+  if (Attacks::getSlidingAttacks(ROOK, s, rooksQueens) & sq)
     return true;
 
   return false;
