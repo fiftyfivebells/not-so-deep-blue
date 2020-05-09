@@ -32,7 +32,7 @@ void MoveGenerator::generateLegalMoves(const Chessboard &cb) {
     Chessboard temp = cb;
     temp.performMove(move);
 
-    if (!temp.isColorInCheck(temp.getActiveSide()))
+    if (!temp.isColorInCheck(temp.getInactiveSide()))
       legalMoves.push_back(move);
   }
 }
