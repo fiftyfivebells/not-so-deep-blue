@@ -158,14 +158,6 @@ Square Chessboard::makeSquareFromFen(std::string fen) {
   return (Square)((r * 8) + f);
 }
 
-std::string Chessboard::makeFenFromSquare(Square sq) {
-  File f = getFileFromSquare(sq);
-  Rank r = getRankFromSquare(sq);
-  std::string file = std::string(1, 'a' + f);
-
-  return file + std::to_string(r);
-}
-
 Color Chessboard::getActiveSide() const { return activeSide; }
 
 Color Chessboard::getInactiveSide() const {
@@ -319,7 +311,7 @@ std::string Chessboard::convertBoardToFen() {
 
   fen += " ";
 
-  if (!(enPassantTarget == NO_SQ)) fen += makeFenFromSquare(enPassantTarget);
+  if (!(enPassantTarget == NO_SQ)) fen += getFenFromSquare(enPassantTarget);
   else fen += "-";
 
   fen += " ";

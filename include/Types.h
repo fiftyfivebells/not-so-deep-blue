@@ -1,6 +1,8 @@
 #ifndef TYPES_H
 #define TYPES_H
 
+#include <string>
+
 enum PieceType {
   PAWN, ROOK, KNIGHT, BISHOP, QUEEN, KING, NONE
 };
@@ -56,6 +58,14 @@ constexpr Rank getRankFromSquare(Square sq) {
 
 constexpr File getFileFromSquare(Square sq) {
   return (File)(sq % 8);
+}
+
+inline std::string getFenFromSquare(Square sq) {
+  File f = getFileFromSquare(sq);
+  Rank r = getRankFromSquare(sq);
+  std::string file = std::string(1, 'a' + f);
+
+  return file + std::to_string(r);
 }
 
 #endif
