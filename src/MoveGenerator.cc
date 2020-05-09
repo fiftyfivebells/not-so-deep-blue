@@ -26,6 +26,8 @@ void MoveGenerator::generateMoves(const Chessboard &cb) {
 }
 
 void MoveGenerator::generateLegalMoves(const Chessboard &cb) {
+  legalMoves.clear();
+
   for (auto move : moves) {
     Chessboard temp = cb;
     temp.performMove(move);
