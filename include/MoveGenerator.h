@@ -41,6 +41,9 @@ class MoveGenerator {
   void generateQueenMoves(const Chessboard &);
   void generateKingMoves(const Chessboard &);
 
+  void generateWhiteCastles(const Chessboard &);
+  void generateBlackCastles(const Chessboard &);
+
   void addMoves(const Chessboard &, Square, PieceType, Bitboard, Bitboard);
 };
 

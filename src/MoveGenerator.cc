@@ -338,6 +338,23 @@ void MoveGenerator::generateKingMoves(const Chessboard &cb) {
 
     addMoves(cb, fromSquare, KING, allMoves, cb.getPiecesToAttack(enemy));
   }
+
+  if (active == WHITE) generateWhiteCastles(cb);
+  if (active == BLACK) generateBlackCastles(cb);
+}
+
+void MoveGenerator::generateWhiteCastles(const Chessboard &cb) {
+  if (cb.canWhiteCastleKS())
+    moves.push_back(Move(SQ_E1, SQ_G1, KING, Move::K_CASTLE));
+  if (cb.canWhiteCastleQS())
+    moves.push_back(Move(SQ_E1, SQ_C1, KING, Move::Q_CASTLE));
+}
+
+void MoveGenerator::generateBlackCastles(const Chessboard &cb) {
+  if (cb.canBlackCastleKS())
+    moves.push_back(Move(SQ_E8, SQ_G8, KING, Move::K_CASTLE));
+  if (cb.canBlackCastleQS())
+    moves.push_back(Move(SQ_E8, SQ_C8, KING, Move::Q_CASTLE));
 }
 
 void MoveGenerator::addMoves(const Chessboard &cb, Square from, PieceType pt,
