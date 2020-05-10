@@ -6,12 +6,13 @@ class Uci {
   Uci();
 
   void uciCommunication();
-  void inputUci();
-  void inputSetOption();
+  void engineInfo();
+  void setOption(std::istringstream &);
   void inputIsReady();
-  void inputNewGame();
-  void inputPosition();
-  void inputGo();
+  void startNewGame();
+  void setPosition(std::istringstream &);
+  void go(std::istringstream &);
+  void getBestMove();
 
  private:
 };
