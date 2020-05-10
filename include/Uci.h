@@ -1,6 +1,11 @@
 #ifndef UCI_H
 #define UCI_H
 
+#include "Search.h"
+#include "Chessboard.h"
+#include <sstream>
+#include <thread>
+
 class Uci {
  public:
   Uci();
