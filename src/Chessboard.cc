@@ -508,6 +508,10 @@ void Chessboard::performMove(Move m) {
 
   activeSide = getInactiveSide();
 
+  setOccupiedSquares();
+  setEmptySquares();
+}
+
 std::string Chessboard::getStringRepresentation() const {
   std::string representation = "8 ";
   char rank = 8;
