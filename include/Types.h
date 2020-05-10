@@ -65,7 +65,7 @@ inline std::string getFenFromSquare(Square sq) {
   Rank r = getRankFromSquare(sq);
   std::string file = std::string(1, 'a' + f);
 
-  return file + std::to_string(r);
+  return file + std::to_string(r + 1);
 }
 
 #endif
