@@ -52,14 +52,14 @@ void Attacks::initKingAttacks() {
 }
 
 void initWhitePawnAttacks() {
-  for (int square = SQ_A2; square < 56; ++square) {
+  for (int square = SQ_A1; square < 64; ++square) {
     Bitboard sq = 1ull << square;
     Attacks::pawnAttacks[WHITE][square] = norWestOne(sq) | norEastOne(sq);
   }
 }
 
 void initBlackPawnAttacks() {
-  for (int square = SQ_H7; square > 7; --square) {
+  for (int square = SQ_H8; square > -1; --square) {
     Bitboard sq = 1ull << square;
     Attacks::pawnAttacks[BLACK][square] = souWestOne(sq) | souEastOne(sq);
   }
