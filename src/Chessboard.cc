@@ -168,7 +168,7 @@ bool Chessboard::isColorInCheck(Color c) const {
   Bitboard king = getPiecesByType(c, KING);
   Square s = (Square)bitScanForward(king);
 
-  Color enemy = getInactiveSide();
+  Color enemy = (c == WHITE) ? BLACK : WHITE;
 
   return isColorAttackingSquare(enemy, s);
 }
