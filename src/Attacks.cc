@@ -150,18 +150,18 @@ Bitboard Attacks::getSlidingAttacks(PieceType pt, Square sq,
   }
 }
 
-Bitboard getKnightAttacks(Square sq, Bitboard occupied) {
-  return Attacks::knightAttacks[sq] & occupied;
+Bitboard getKnightAttacks(Square sq, Bitboard available) {
+  return Attacks::knightAttacks[sq] & available;
 }
 
-Bitboard getKingAttacks(Square sq, Bitboard occupied) {
-  return Attacks::kingAttacks[sq] & occupied;
+Bitboard getKingAttacks(Square sq, Bitboard available) {
+  return Attacks::kingAttacks[sq] & available;
 }
 
-Bitboard Attacks::getNonSlidingAttacks(PieceType pt, Square sq, Bitboard occupied) {
+Bitboard Attacks::getNonSlidingAttacks(PieceType pt, Square sq, Bitboard available) {
   switch (pt) {
-    case KNIGHT: return getKnightAttacks(sq, occupied);
-    case KING: return getKingAttacks(sq, occupied);
+    case KNIGHT: return getKnightAttacks(sq, available);
+    case KING: return getKingAttacks(sq, available);
     default: return EMPTY;
   }
 }
