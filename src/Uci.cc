@@ -29,3 +29,9 @@ void Uci::uciCommunication() {
   }
 }
 
+void Uci::engineInfo() {
+  std::cout << "id name Not So Deep Blue" << std::endl;
+  std::cout << "id author Stephen Bell" << std::endl;
+
+  std::cout << "uciok" << std::endl;
+}
