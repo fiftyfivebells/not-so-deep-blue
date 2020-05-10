@@ -43,6 +43,8 @@ class Move {
   unsigned int getFlag() const;
   void setFlag(unsigned int);
 
+  std::string getMoveNotation() const;
+
   bool operator==(Move) const;
   bool operator!=(Move) const;
 

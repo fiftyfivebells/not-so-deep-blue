@@ -66,6 +66,30 @@ void Move::setFlag(unsigned int flag) {
   move = (move & ~bitMask) | ((flag << 21) & bitMask);
 }
 
+std::string Move::getMoveNotation() const {
+  Square from = getFromSquare();
+  Square to = getToSquare();
+
+  std::string notation = getFenFromSquare(from) + getFenFromSquare(to);
+
+  if (getFlag() == PROMOTION || getFlag() == CAP_PROMOTION) {
+    switch(getPromotionPiece()) {
+      case ROOK: notation += "r";
+        break;
+      case KNIGHT: notation += "n";
+        break;
+      case BISHOP: notation += "b";
+        break;
+      case QUEEN: notation += "q";
+        break;
+      default:
+        break;
+    }
+  }
+
+  return notation;
+}
+
 bool Move::operator==(Move other) const {
   return (move & 0xffff) == (other.getMove() & 0xffff);
 }
