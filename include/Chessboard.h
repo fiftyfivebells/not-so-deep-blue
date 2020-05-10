@@ -37,6 +37,7 @@ class Chessboard {
   void removePiece(Square, PieceType, Color);
   void addPiece(Square, PieceType, Color);
   void performMove(Move);
+  std::string getStringRepresentation() const;
 
  private:
   Bitboard pieces[2][6];

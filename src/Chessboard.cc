@@ -507,4 +507,73 @@ void Chessboard::performMove(Move m) {
   if (activeSide == BLACK) ++turnNumber;
 
   activeSide = getInactiveSide();
+
+std::string Chessboard::getStringRepresentation() const {
+  std::string representation = "8 ";
+  char rank = 8;
+
+  Bitboard position = 56;
+  int processed = 0;
+
+  while (processed < 64) {
+    Bitboard sq = 1ull << position;
+    bool occupied = (sq & getOccupiedSquares()) != 0;
+
+    if (occupied) {
+      if (sq & pieces[WHITE][PAWN]) representation += " P ";
+      if (sq & pieces[BLACK][PAWN]) representation += " p ";
+
+      if (sq & pieces[WHITE][ROOK]) representation += " R ";
+      if (sq & pieces[BLACK][ROOK]) representation += " r ";
+
+      if (sq & pieces[WHITE][KNIGHT]) representation += " N ";
+      if (sq & pieces[BLACK][KNIGHT]) representation += " n ";
+
+      if (sq & pieces[WHITE][BISHOP]) representation += " B ";
+      if (sq & pieces[BLACK][BISHOP]) representation += " b ";
+
+      if (sq & pieces[WHITE][QUEEN]) representation += " Q ";
+      if (sq & pieces[BLACK][QUEEN]) representation += " q ";
+
+      if (sq & pieces[WHITE][KING]) representation += " K ";
+      if (sq & pieces[BLACK][KING]) representation += " k ";
+    }
+    else
+      representation += " . ";
+
+    ++processed;
+
+    if ((processed % 8 == 0) && (processed != 64)) {
+      switch (processed / 8) {
+        case 1:
+          representation += "        ";
+          representation += (getActiveSide() == WHITE) ? "White " : "Black ";
+          representation += " to move";
+          break;
+        case 2:
+          representation += "        Halfmove clock: ";
+          representation += std::to_string(halfMoveClock);
+          break;
+        case 3:
+          representation += "       Castling Rights: ";
+          representation += castleAvailability & 0b0001 ? "K" : "";
+          representation += castleAvailability & 0b0010 ? "Q" : "";
+          representation += castleAvailability & 0b0100 ? "k" : "";
+          representation += castleAvailability & 0b1000 ? "q" : "";
+          break;
+        case 4:
+          representation += "     en Passant Square: ";
+          representation += enPassantTarget == NO_SQ ? "-" : getFenFromSquare(enPassantTarget);
+          break;
+      }
+      representation += "\n" + std::to_string(--rank) + " ";
+      position -= 16;
+    }
+
+    ++position;
+  }
+
+  representation += "\n\n   A  B  C  D  E  F  G  H";
+
+  return representation;
 }
