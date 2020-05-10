@@ -100,7 +100,7 @@ Bitboard getRookAttacks(Square sq, Bitboard occupied) {
     attacks &= ~Rays::getRayBoard(Rays::South, blocker);
   }
 
-  if (Rays::getRayBoard(Rays::North, sq) & occupied) {
+  if (Rays::getRayBoard(Rays::West, sq) & occupied) {
     int blocker = bitScanReverse(Rays::getRayBoard(Rays::West, sq) & occupied);
     attacks &= ~Rays::getRayBoard(Rays::West, blocker);
   }
@@ -130,7 +130,7 @@ Bitboard getBishopAttacks(Square sq, Bitboard occupied) {
   }
 
   if (Rays::getRayBoard(Rays::SouthEast, sq) & occupied) {
-    int blocker = bitScanForward(Rays::getRayBoard(Rays::SouthEast, sq) & occupied);
+    int blocker = bitScanReverse(Rays::getRayBoard(Rays::SouthEast, sq) & occupied);
     attacks &= ~Rays::getRayBoard(Rays::SouthEast, blocker);
   }
 
