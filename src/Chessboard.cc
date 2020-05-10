@@ -45,23 +45,21 @@ void Chessboard::setOccupiedSquares() {
 Square Chessboard::getEnPassantTarget() const { return enPassantTarget; }
 
 bool Chessboard::isColorAttackingSquare(Color c, Square s) const {
-  Bitboard sq = 1ull << s;
-  Bitboard occupied = getOccupiedSquares();
   Color opposite = getInactiveSide();
 
-  if (Attacks::getPawnAttacks(s, opposite, getPiecesByType(c, PAWN)) & sq)
+  if (Attacks::getPawnAttacks(s, opposite, ~EMPTY) & getPiecesByType(c, PAWN))
     return true;
-  if (Attacks::getNonSlidingAttacks(KNIGHT, s, getPiecesByType(c, KNIGHT)) & sq)
+  if (Attacks::getNonSlidingAttacks(KNIGHT, s, ~EMPTY) & getPiecesByType(c, KNIGHT))
     return true;
-  if (Attacks::getNonSlidingAttacks(KING, s, getPiecesByType(c, KING)) & sq)
+  if (Attacks::getNonSlidingAttacks(KING, s, ~EMPTY) & getPiecesByType(c, KING))
     return true;
 
   Bitboard bishopsQueens = getPiecesByType(c, BISHOP) | getPiecesByType(c, QUEEN);
-  if (Attacks::getSlidingAttacks(BISHOP, s, bishopsQueens) & sq)
+  if ((getBishopAttacksFromSquare(s, EMPTY)) & bishopsQueens)
     return true;
 
-  Bitboard rooksQueens = getPiecesByType(c, ROOK) | getPiecesByType(c, QUEEN);
-  if (Attacks::getSlidingAttacks(ROOK, s, rooksQueens) & sq)
+  Bitboard rooksQueens = (getPiecesByType(c, ROOK) | getPiecesByType(c, QUEEN));
+  if ((getRookAttacksFromSquare(s, EMPTY)) & rooksQueens)
     return true;
 
   return false;
