@@ -24,7 +24,7 @@ class Move {
     CAP_PROMOTION
   };
 
-    unsigned int getMove() const;
+  unsigned int getMove() const;
   Square getToSquare() const;
   void setToSquare(Square);
 
