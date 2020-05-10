@@ -128,7 +128,7 @@ Bitboard Chessboard::getAttacksFromSquare(Square s, Color c) const {
 }
 
 Bitboard Chessboard::getPawnAttacksFromSquare(Square s, Color c, Bitboard friends) const {
-  return Attacks::getPawnAttacks(s, c, getOccupiedSquares()) & ~friends;
+  return Attacks::getPawnAttacks(s, c, getOccupiedSquares());
 }
 
 Bitboard Chessboard::getRookAttacksFromSquare(Square s, Bitboard friends) const {
@@ -144,11 +144,13 @@ Bitboard Chessboard::getQueenAttacksFromSquare(Square s, Bitboard friends) const
 }
 
 Bitboard Chessboard::getKingAttacksFromSquare(Square s, Bitboard friends) const {
-  return Attacks::getNonSlidingAttacks(KING, s, getOccupiedSquares()) & ~friends;
+  Bitboard available = getEmptySquares() | getAllPieces(getInactiveSide());
+  return Attacks::getNonSlidingAttacks(KING, s, available);
 }
 
 Bitboard Chessboard::getKnightAttacksFromSquare(Square s, Bitboard friends) const {
-  return Attacks::getNonSlidingAttacks(KNIGHT, s, getOccupiedSquares()) & ~friends;
+  Bitboard available = getEmptySquares() | getAllPieces(getInactiveSide());
+  return Attacks::getNonSlidingAttacks(KNIGHT, s, available);
 }
 
 Square Chessboard::makeSquareFromFen(std::string fen) {
