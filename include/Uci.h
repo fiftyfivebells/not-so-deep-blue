@@ -15,6 +15,7 @@ class Uci {
   void getBestMove();
 
  private:
+  Chessboard *cb;
 };
 
 #endif
