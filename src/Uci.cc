@@ -2,6 +2,10 @@
 
 Uci::Uci() {}
 
+Uci::Uci() {
+  cb = new Chessboard();
+}
+
 void Uci::uciCommunication() {
   std::string line;
   std::string entry;
