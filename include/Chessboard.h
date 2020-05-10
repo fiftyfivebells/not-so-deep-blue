@@ -51,7 +51,6 @@ class Chessboard {
   Square enPassantTarget;
 
   Square makeSquareFromFen(std::string);
-  std::string makeFenFromSquare(Square);
   Bitboard *getWhitePieces();
   Bitboard *getBlackPieces();
   Bitboard getPawnAttacksFromSquare(Square, Color, Bitboard) const;
