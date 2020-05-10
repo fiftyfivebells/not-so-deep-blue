@@ -369,8 +369,10 @@ void MoveGenerator::addMoves(const Chessboard &cb, Square from, PieceType pt,
   allMoves &= ~(cb.getPiecesByType(enemy, KING));
 
   Bitboard quietMoves = allMoves & ~canAttack;
+
   while (quietMoves) {
     Square to = popLSB(quietMoves);
+
     moves.push_back(Move(from, to, pt));
   }
 
