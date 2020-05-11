@@ -93,6 +93,7 @@ void MoveGenerator::generateWPawnLeftAttacks(const Chessboard &cb) {
     Move move(Square(toSquare - 7), toSquare, PAWN, Move::CAPTURE);
     move.setCapturedPiece(cb.getPieceAtSquare(BLACK, toSquare));
 
+    captures.push_back(move);
     moves.push_back(move);
   }
 
@@ -108,6 +109,7 @@ void MoveGenerator::generateWPawnLeftAttacks(const Chessboard &cb) {
     Move ep(Square(toSquare - 7), toSquare, PAWN, Move::EP_CAPTURE);
     ep.setCapturedPiece(PAWN);
 
+    captures.push_back(ep);
     moves.push_back(ep);
   }
 }
@@ -127,6 +129,7 @@ void MoveGenerator::generateWPawnRightAttacks(const Chessboard &cb) {
     Move move(Square(toSquare - 9), toSquare, PAWN, Move::CAPTURE);
     move.setCapturedPiece(cb.getPieceAtSquare(BLACK, toSquare));
 
+    captures.push_back(move);
     moves.push_back(move);
   }
 
@@ -142,6 +145,7 @@ void MoveGenerator::generateWPawnRightAttacks(const Chessboard &cb) {
     Move ep(Square(toSquare - 9), toSquare, PAWN, Move::EP_CAPTURE);
     ep.setCapturedPiece(PAWN);
 
+    captures.push_back(ep);
     moves.push_back(ep);
   }
 }
@@ -200,6 +204,7 @@ void MoveGenerator::generateBPawnLeftAttacks(const Chessboard &cb) {
     Move move(Square(toSquare + 9), toSquare, PAWN, Move::CAPTURE);
     move.setCapturedPiece(cb.getPieceAtSquare(WHITE, toSquare));
 
+    captures.push_back(move);
     moves.push_back(move);
   }
 
@@ -215,6 +220,7 @@ void MoveGenerator::generateBPawnLeftAttacks(const Chessboard &cb) {
     Move ep(Square(toSquare + 9), toSquare, PAWN, Move::EP_CAPTURE);
     ep.setCapturedPiece(PAWN);
 
+    captures.push_back(ep);
     moves.push_back(ep);
   }
 }
@@ -234,6 +240,7 @@ void MoveGenerator::generateBPawnRightAttacks(const Chessboard &cb) {
     Move move(Square(toSquare + 7), toSquare, PAWN, Move::CAPTURE);
     move.setCapturedPiece(cb.getPieceAtSquare(WHITE, toSquare));
 
+    captures.push_back(move);
     moves.push_back(move);
   }
 
@@ -249,6 +256,7 @@ void MoveGenerator::generateBPawnRightAttacks(const Chessboard &cb) {
     Move ep(Square(toSquare + 7), toSquare, PAWN, Move::EP_CAPTURE);
     ep.setCapturedPiece(PAWN);
 
+    captures.push_back(ep);
     moves.push_back(ep);
   }
 }
@@ -265,18 +273,22 @@ void MoveGenerator::generatePawnPromotions(Square from, Square to, PieceType pt)
   Move queen(promotion);
   queen.setPromotionPiece(QUEEN);
   moves.push_back(queen);
+  captures.push_back(queen);
 
   Move bishop(promotion);
   bishop.setPromotionPiece(BISHOP);
   moves.push_back(bishop);
+  captures.push_back(bishop);
 
   Move rook(promotion);
   rook.setPromotionPiece(ROOK);
   moves.push_back(rook);
+  captures.push_back(rook);
 
   Move knight(promotion);
   knight.setPromotionPiece(KNIGHT);
   moves.push_back(knight);
+  captures.push_back(knight);
 }
 
 void MoveGenerator::generateRookMoves(const Chessboard &cb) {
@@ -387,5 +399,6 @@ void MoveGenerator::addMoves(const Chessboard &cb, Square from, PieceType pt,
     m.setCapturedPiece(capture);
 
     moves.push_back(m);
+    captures.push_back(m);
   }
 }
