@@ -21,6 +21,8 @@ class MoveGenerator {
   std::vector<Move> moves;
   std::vector<Move> legalMoves;
 
+  void generateLegalMoves(const Chessboard &);
+
   void generateWPawnMoves(const Chessboard &);
   void generateWPawnSinglePush(const Chessboard &);
   void generateWPawnDoublePush(const Chessboard &);

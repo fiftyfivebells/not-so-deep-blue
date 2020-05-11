@@ -23,6 +23,8 @@ void MoveGenerator::generateMoves(const Chessboard &cb) {
   generateBishopMoves(cb);
   generateQueenMoves(cb);
   generateKingMoves(cb);
+
+  generateLegalMoves(cb);
 }
 
 void MoveGenerator::generateLegalMoves(const Chessboard &cb) {
