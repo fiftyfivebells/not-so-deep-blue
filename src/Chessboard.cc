@@ -232,6 +232,9 @@ void Chessboard::updateCastleAvailability(Move m) {
         break;
       case SQ_H8: castleAvailability &= ~0b0100;
         break;
+      case SQ_E1: castleAvailability &= ~0b0011;
+        break;
+      case SQ_E8: castleAvailability &= ~0b1100;
     }
   } else {
     switch(m.getFromSquare()) {
