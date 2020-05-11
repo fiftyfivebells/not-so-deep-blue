@@ -180,7 +180,7 @@ void MoveGenerator::generateBPawnSinglePush(const Chessboard &cb) {
 
 void MoveGenerator::generateBPawnDoublePush(const Chessboard &cb) {
   Bitboard singlePush = (cb.getPiecesByType(BLACK, PAWN) >> 8) & cb.getEmptySquares();
-  Bitboard doublePush = (singlePush << 8) & cb.getEmptySquares() & Rank5;
+  Bitboard doublePush = (singlePush >> 8) & cb.getEmptySquares() & Rank5;
 
   while (doublePush) {
     Square toSquare = popLSB(doublePush);
