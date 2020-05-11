@@ -5,7 +5,32 @@ Search::Search() : cb() {}
 
 Search::Search(Chessboard &cb) : cb(cb) {}
 
-Move Search::findBestMove() {
+void Search::findBestMove() {
+  int max = std::numeric_limits<int>::min();
+  int score;
+  MoveGenerator mg(cb);
+  mg.generateMoves(cb);
+  mg.generateLegalMoves(cb);
+
+  for (auto move : mg.getLegalMoves()) {
+    Chessboard temp = cb;
+    temp.makeMove(move);
+
+    score = -alphaBeta(temp, std::numeric_limits<int>::min(),
+                      std::numeric_limits<int>::max(), 4);
+
+    if (score > max) {
+      max = score;
+      std::cout << "setting best move to " << move.getMoveNotation()
+                << std::endl;
+      bestMove = move;
+    }
+  }
+
+  cb.makeMove(bestMove);
+  std::cout << cb.getStringRepresentation() << std::endl;
+  std::cout << "bestmove " << bestMove.getMoveNotation() << std::endl;
+}
 
 int Search::alphaBeta(Chessboard &cb, int alpha, int beta, int depth) {
   if (depth == 0) return quiesce(cb, alpha, beta);
