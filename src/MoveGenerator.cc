@@ -7,7 +7,6 @@ MoveGenerator::MoveGenerator(const Chessboard &cb) {
   generateMoves(cb);
 }
 
-void MoveGenerator::generateMoves(const Chessboard &cb) {}
 std::vector<Move> MoveGenerator::getMoves() const { return moves; }
 std::vector<Move> MoveGenerator::getLegalMoves() const { return legalMoves; }
 
@@ -32,7 +31,7 @@ void MoveGenerator::generateLegalMoves(const Chessboard &cb) {
 
   for (auto move : moves) {
     Chessboard temp = cb;
-    temp.performMove(move);
+    temp.makeMove(move);
 
     if (!temp.isColorInCheck(temp.getInactiveSide()))
       legalMoves.push_back(move);
