@@ -441,7 +441,7 @@ void Chessboard::addPiece(Square s, PieceType pt, Color c) {
   occupiedSquares |= square;
 }
 
-void Chessboard::performMove(Move m) {
+void Chessboard::makeMove(Move m) {
   Square to = m.getToSquare();
   Square from = m.getFromSquare();
   PieceType pt = m.getPieceType();
