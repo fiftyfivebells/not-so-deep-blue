@@ -16,7 +16,6 @@ class MoveGenerator {
   std::vector<Move> getCaptures() const;
 
   void generateMoves(const Chessboard &);
-  void generateLegalMoves(const Chessboard &);
 
  private:
   std::vector<Move> moves;
