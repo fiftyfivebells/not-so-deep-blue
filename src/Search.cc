@@ -61,5 +61,28 @@ int Search::alphaBeta(Chessboard &cb, int alpha, int beta, int depth) {
   return bestScore;
 }
 
+int Search::evaluate(Chessboard &cb) {
+  int score = 0;
+  Color active = cb.getActiveSide();
+
+  score += (100 * bitCount(cb.getPiecesByType(WHITE, PAWN)));
+  score += (320 * bitCount(cb.getPiecesByType(WHITE, KNIGHT)));
+  score += (330 * bitCount(cb.getPiecesByType(WHITE, BISHOP)));
+  score += (500 * bitCount(cb.getPiecesByType(WHITE, ROOK)));
+  score += (900 * bitCount(cb.getPiecesByType(WHITE, QUEEN)));
+  score += (20000 * bitCount(cb.getPiecesByType(WHITE, KING)));
+
+  score -= (100 * bitCount(cb.getPiecesByType(BLACK, PAWN)));
+  score -= (320 * bitCount(cb.getPiecesByType(BLACK, KNIGHT)));
+  score -= (330 * bitCount(cb.getPiecesByType(BLACK, BISHOP)));
+  score -= (500 * bitCount(cb.getPiecesByType(BLACK, ROOK)));
+  score -= (900 * bitCount(cb.getPiecesByType(BLACK, QUEEN)));
+  score -= (20000 * bitCount(cb.getPiecesByType(BLACK, KING)));
+  // score *= (bitCount(cb.getAllPieces(WHITE) - cb.getAllPieces(BLACK)));
+  score *= (active == WHITE) ? 1 : -1;
+
+  return score;
+}
+
 
 }
