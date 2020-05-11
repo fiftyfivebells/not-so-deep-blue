@@ -8,10 +8,15 @@ class Search {
   Search();
   Search(Chessboard &);
 
-  Move findBestMove();
+  void findBestMove();
 
- private:
+  //private:
   Chessboard cb;
+  Move bestMove;
+
+  int alphaBeta(Chessboard &, int, int, int);
+  int evaluate(Chessboard &);
+  int quiesce(Chessboard &, int, int);
 };
 
 #endif
